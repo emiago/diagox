@@ -1,0 +1,27 @@
+/gopbx
+/diagox
+/go.work*
+/recordings
+/.vscode
+/.devspace
+/raftdata
+/hashring
+/github
+/frontend/webrtcphone copy.html
+/website
+/cmd/*
+!/cmd/*.go
+!/cmd/diagox/
+!/cmd/diagox/**
+/enterprise
+/example-configs
+/TODO.md
+/webrtc_phone
+/sipp-tests0
+/jaeger-ui
+/diagomod
+/asterisk-loadtest
+/IDEAS.md
+/devspace.yaml
+/diagox-enterprise
+/docker-compose*

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagox Recording</title>
+</head>
+<body style="display: flex; justify-items: center; width: 100%; flex-direction: column;">
+    <h3>Recording listen:</h3>
+    <audio controls src="{{ .RecordingURL }}" ></audio>
+    <button style="padding: 0px; margin: 10px 0px; max-width: 30%;"><a href="{{ .RecordingURL }}" download="{{ .DownloadFileName }}"> Download audio </a></button>
+</body>
+</html>
+

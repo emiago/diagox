@@ -1,0 +1,102 @@
+openapi: "3.0.0"
+info:
+  version: "3.0.0"
+  title: "Diagox API"
+servers:
+  - url: http://localhost:6060/api/v1
+  - url: /api/v1
+paths:
+  /history:
+    get:
+      parameters:
+        - name: date_from 
+          in: query 
+          required: false
+          schema: 
+            type: string
+        - name: date_to
+          in: query 
+          required: false
+          schema: 
+            type: string
+        - name: query
+          in: query 
+          required: false
+          schema: 
+            type: string
+      description: Read CDR history
+      responses:
+        200:
+          description: OK
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/CDR'
+
+        400:
+          description: Bad request 
+        500: 
+          description: Internal server error
+
+components:
+  schemas:
+    CDR:
+      type: object
+      properties:
+        callId:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        duration:
+          type: number
+          format: float
+          description: Duration in seconds
+        callerId:
+          type: string
+        calleeId:
+          type: string
+        bill:
+          type: number
+          format: float
+        disposition:
+          type: string
+        inMediaStats:
+          $ref: '#/components/schemas/DialogMediaStats'
+        outMediaStats:
+          $ref: '#/components/schemas/DialogMediaStats'
+        mes:
+          type: number
+          format: float
+          description: Media Experience Score
+        recordingId:
+          type: string
+        startTimeFormatted:
+          type: string
+    DialogMediaStats:
+      type: object
+      properties:
+        rttMax:
+          type: number
+          format: float
+          description: RTT max in seconds
+        rttMin:
+          type: number
+          format: float
+          description: RTT min in seconds
+        packetsReadCount:
+          type: integer
+          format: uint64
+        packetsWriteCount:
+          type: integer
+          format: uint64
+        packetsReadLost:
+          type: integer
+          format: uint32
+        packetsWriteLost:
+          type: integer
+          format: uint32
+        maxJitter:
+          type: number
+          format: float
+          description: Max jitter in seconds

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DiagoxPhone</title>
+  <script type="module" crossorigin src="/webrtc_phone/assets/index-Cfl8nk-v.js"></script>
+  <link rel="stylesheet" crossorigin href="/webrtc_phone/assets/index-Dkbu-IpK.css">
+</head>
+<body>
+    <main class="app">
+        <header class="app-header">
+            <h1>DiagoxPhone</h1>
+            <div class="status" id="status">
+                <span class="dot" id="statusDot"></span>
+                <span id="statusText">disconnected</span>
+            </div>
+        </header>
+
+        <section class="dialer" id="dialerPanel">
+            <label for="number" class="field-label">Destination</label>
+            <input
+                id="number"
+                type="tel"
+                inputmode="tel"
+                autocomplete="off"
+                placeholder="e.g. 1001 or +49301234567"
+                value="playback_webrtc"
+            />
+            <button id="callBtn" class="btn btn-primary" disabled>
+                <span class="icon" aria-hidden="true">&#9742;</span>
+                <span>Call</span>
+            </button>
+        </section>
+
+        <section class="active-call hidden" id="callPanel">
+            <div class="call-info">
+                <div class="call-direction" id="callDirection">Outgoing</div>
+                <div class="call-number" id="callNumber">&mdash;</div>
+                <div class="call-state" id="callState">connecting&hellip;</div>
+                <div class="call-timer" id="callTimer">00:00</div>
+                <div class="vu" aria-label="Remote audio level">
+                    <div class="vu-bar" id="vuBar"></div>
+                </div>
+            </div>
+            <button id="hangupBtn" class="btn btn-danger">
+                <span class="icon" aria-hidden="true">&#9990;</span>
+                <span>Hang up</span>
+            </button>
+        </section>
+
+        <section class="log" id="logPanel" aria-live="polite">
+            <label class="debug-toggle">
+                <input type="checkbox" id="debugToggle" />
+                <span>JsSIP debug</span>
+            </label>
+            <pre id="logOutput"></pre>
+        </section>
+
+        <audio id="remoteAudio" autoplay="true"></audio>
+    </main>
+
+    <button id="speakerBtn" class="fab" type="button" title="Change speaker" aria-label="Change speaker">
+        &#128266;
+    </button>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/css/tailwind.min.css">
+    <!-- <link rel="preload" href="/static/css/tailwind.min.css" as="style"> -->
+    <!-- <script src="/static/js/htmx-1.9.12.js"></script> -->
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <script>0</script> <!-- Firefox fix FUOC -->
+    <div class="flex h-screen">
+{{ if .Sidebar }}
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white flex flex-col">
+            <div class="p-4 text-xl font-bold">DIAGOX</div>
+            <nav>
+                <a href="/history" class="block px-4 py-2 hover:bg-gray-700">History</a>
+                <a href="/configuration" class="block px-4 py-2 hover:bg-gray-700">Configuration</a> 
+
+                  <!-- <a href="/history" class="block px-4 py-2 hover:bg-gray-700" 
+                   hx-get="/history" 
+                   hx-target="#main-content" 
+                   hx-swap="innerHTML" 
+                   hx-push-url="/history">History</a> -->
+                <!-- <a href="/configuration" class="block px-4 py-2 hover:bg-gray-700" 
+                   hx-get="/configuration" 
+                   hx-target="#main-content" 
+                   hx-swap="innerHTML" 
+                   hx-push-url="/configuration">Configuration</a> -->
+            </nav>
+        </div>
+{{ end }}
+        <!-- Main Content -->
+        <div class="flex-1 p-6 overflow-y-scroll" id="main-content" >
+            <!-- Initial content will load here (Dashboard) -->
+            {{ .Content }}
+        </div>
+    </div>
+</body>
+</html>

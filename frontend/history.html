@@ -1,0 +1,96 @@
+<div>
+    <h1 class="text-3xl font-bold mb-6">Call History</h1>
+    <!-- Search Filters -->
+    <!-- <div class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4"> -->
+    <div class="">
+        <form action="" method="GET" class="flex items-center space-x-2 w-full mb-2">
+            <label for="date_from" class="text-sm text-gray-600">From</label>
+            <input type="datetime-local" name="date_from" value="{{.DateFrom}}" class="border p-2 rounded">
+            <label for="date_to" class="text-sm text-gray-600">To</label>
+            <input type="datetime-local" name="date_to" value="{{.DateTo}}" class="border p-2 rounded" >
+            <label for="query" class="text-sm text-gray-600">Query</label>
+            <input type="text" name="query" value="{{.Query}}" autocomplete="off" class="border p-2 rounded flex-1" placeholder="from:<from> | to:<to> | call_id:<call_id> | orig_call_id:<originator call id> | mes: <0.0-1.0>(Default filters from)">
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 focus:outline-none " >Search</button>
+        </form>
+    </div>
+    <!-- History Table -->
+    <table class="min-w-full bg-white shadow-lg rounded-lg">
+        <thead>
+            <tr class="bg-gray-800 text-white">
+                <th class="py-2 px-4">Direction</th>
+                <th class="py-2 px-4">CallID / Originator CallID</th>
+                <th class="py-2 px-4">Date</th>
+                <th class="py-2 px-4">Duration</th>
+                <th class="py-2 px-4">From</th>
+                <th class="py-2 px-4">To</th>
+                <th class="py-2 px-4">Disposition</th>
+                <th class="py-2 px-4">MES</th>
+                <th class="py-2 px-4">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+{{ range $index, $cdr := .CDRS }}
+            <tr class="clickable-row bg-white cursor-pointer" data-subtable-id="subtable-{{$index}}">
+                <td class="py-2 px-4">{{ $cdr.Direction }}</td>
+                <td class="py-2 px-4">{{ $cdr.CallID }} / {{ $cdr.OriginatorCallID }}</td>
+                <td class="py-2 px-4">{{ $cdr.StartTimeFormated }}</td>
+                <td class="py-2 px-4">{{ $cdr.Duration }}</td>
+                <td class="py-2 px-4">{{ $cdr.CallerID }}</td>
+                <td class="py-2 px-4">{{ $cdr.CalleeID }}</td>
+                <td class="py-2 px-4">{{ $cdr.Disposition }}</td>
+                <td class="py-2 px-4">{{ $cdr.MES }}</td>
+                <td class="py-2 px-4">
+                    <button 
+                        class="bg-blue-500 text-white px-4 py-2 rounded"
+                        onclick="window.open('/history/siptrace?callid={{ $cdr.CallID }}', '_blank', 'width=800,height=600');"
+                    >SIP Trace</button>
+    {{ if $cdr.RecordingID }}                    
+                    <button 
+                        class="bg-blue-500 text-white px-4 py-2 rounded"
+                        onclick="window.open('/history/recording?recording_id={{ $cdr.RecordingID }}', '_blank', 'width=800,height=600');"
+                    >Recording</button>
+    {{ end }}
+                </td>
+            </tr>
+             <!-- Subtable that will show when the row is clicked -->
+            <tr id="subtable-{{$index}}" class="subtable hidden bg-gray-100">
+                <td colspan="6" class="p-4">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-300">
+                                <th class="border px-4 py-2">Packet Count (Read/Write)</th>
+                                <th class="border px-4 py-2">RTT (Max/Min)</th>
+                                <th class="border px-4 py-2">Packet Loss (Read/Write)</th>
+                                <th class="border px-4 py-2">Jitter(Max)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2">{{ $cdr.MediaStats.PacketsReadCount }}/{{ $cdr.MediaStats.PacketsWriteCount }}</td>
+                                <td class="border px-4 py-2">{{ $cdr.MediaStats.RTTMax }}/{{ $cdr.MediaStats.RTTMin }}</td>
+                                <td class="border px-4 py-2">{{ $cdr.MediaStats.PacketsReadLost }}/{{ $cdr.MediaStats.PacketsWriteLost }}</td>
+                                <td class="border px-4 py-2">{{ $cdr.MediaStats.MaxJitter }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+{{ end }}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // toggle subtable rows visibility
+    document.querySelectorAll('.clickable-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const subtableId = row.getAttribute('data-subtable-id');
+            const subtable = document.getElementById(subtableId);
+            if (subtable.classList.contains('hidden')) {
+                subtable.classList.remove('hidden');
+            } else {
+                subtable.classList.add('hidden');
+            }
+        });
+    });
+</script>

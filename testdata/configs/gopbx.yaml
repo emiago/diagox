@@ -1,0 +1,118 @@
+version: "2.4"
+
+# TODO
+# - Controling DNS resolving like should it cache or not
+  
+transports: 
+  udp:
+    transport: "udp"
+    bind: 0.0.0.0
+    port: 5060
+  tcp:
+    transport: "tcp"
+    bind: 0.0.0.0
+    port: 5060
+  udp_local:
+    transport: "udp"
+    bind: 127.0.0.1
+    port: 5099
+  
+
+routes:
+  default: # Default context goes every call from all endpoints
+    - id: "4912345678" # E164 
+      endpoint: carrier_internal
+      sip_header:
+        X-MyCustom-Header: "gopbx"
+    - id: "123"
+      match: prefix
+      endpoint: carrier_internal
+      recording: false
+    - id: ""
+      match: "any"
+      use_registry: true
+
+  with_fallback:
+    - id: ""
+      match: "any"
+      fallback: 
+        codes: [401,404,487]
+        timeout: true
+        endpoints:
+        - carrier_external
+        - carrier_external_fallback
+
+  outgoing: # Outgoing routes all calls
+    # Order here matters 
+    - id: "987" 
+      match: "prefix"
+      endpoint: carrier_external
+    - id: ""
+      match: "any"
+      use_registry: true
+    - id: ""
+      match: "any" #Match all
+      #endpoint: nowhere
+      hangup: 
+        code: 404
+    
+
+endpoints:
+  # Handling any traffic can be just with mathc transport. If you want only with anonymous user then match by user
+
+  carrier_external: # Address of record
+    # routing: default
+    match: 
+      # Match order user > IP
+      type: "ip"
+      values: ["192.168.0.0/16"]
+    auth:
+      username: "test" 
+      password: "test123"
+   
+    uri: "sip:localhost.coredns.local:5080" # Uri is for outgoing, but we only need host and port
+  
+  carrier_external_fallback:
+    uri: "sip:localhost:5090"
+
+  carrier_internal: # Address of record
+    route: outgoing # Context of routing
+
+    # Incoming options
+    match: 
+      type: "ip"
+      values: ["127.0.0.1/8"]
+    # Incoming + registration options
+    # auth:
+    #   username: "test" 
+    #   password: "test123"
+
+    # Outgoing options only needed if carrier used in routing outgoign
+    # transport: udp_local # Force to use this transport for outgoing, otherwise it will choose based on protocol
+    #uri: "sip:localhost:5080" # Uri is for outgoing, but we only need host and port
+
+  carrier_fallback:
+    route: with_fallback 
+    match: 
+      type: "ip"
+      values: ["127.0.0.111/32"]
+
+
+  alice: # -> alice@tenant1.domain.com
+    match: 
+      type: "user" 
+    auth:
+      username: "alice" 
+      password: "test123"    
+
+  bob: # -> alice@tenant1.domain.com
+    match: 
+      type: "user" 
+    auth:
+      username: "carrier" 
+      password: "test123" 
+    
+
+
+
+

@@ -1,0 +1,72 @@
+<div>
+    <h1 class="text-3xl font-bold mb-6">Configuration yaml</h1>
+    <h1 class="text-2xl font-bold">Configuration</h1>
+    <div id="yaml-editor" class="mt-4 border rounded p-2" style="height: calc(100vh - 250px);"></div>
+    <button id="save-button" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+
+    <!-- Include CodeMirror -->
+    <link rel="stylesheet" href="/static/css/codemirror.min.css">
+    <link rel="stylesheet" href="/static/css/material.min.css">
+    <script src="/static/js/codemirror.min.js"></script>
+    <script src="/static/js/yaml.min.js"></script>
+
+    <script>
+        async function fetchConfig() {
+            var configYaml = ""
+            try {
+                // after this line, our function will wait for the `fetch()` call to be settled
+                // the `fetch()` call will either return a Response or throw an error
+                const response = await fetch('/configuration/yaml', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/x-yaml'
+                    },
+                })
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+                // after this line, our function will wait for the `response.json()` call to be settled
+                // the `response.json()` call will either return the parsed JSON object or throw an error
+                configYaml = await response.text();
+            } catch (error) {
+                console.error(`Could not get products: ${error}`);
+                return;
+            }
+
+            const yamlEditor = CodeMirror(document.getElementById('yaml-editor'), {
+                lineNumbers: true,
+                mode: 'yaml',
+                theme: 'material',
+                height: '100%',
+                value: configYaml,
+            });
+            yamlEditor.setSize("100%", "100%");
+
+            // Save button functionality
+            document.getElementById('save-button').addEventListener('click', function() {
+                const yamlContent = yamlEditor.getValue();
+                console.log("YAML Content to Save:", yamlContent);
+                // Here you would send the yamlContent to your backend to save it
+                // For example, using fetch:
+                // fetch('/save-config', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/x-yaml'
+                //     },
+                //     body: yamlContent
+                // }).then(response => {
+                //     if (response.ok) {
+                //         alert('Configuration saved successfully!');
+                //     } else {
+                //         alert('Error saving configuration.');
+                //     }
+                // });
+            });
+        }
+
+
+        window.onload = function () {
+            fetchConfig()
+        }
+    </script>
+</div>

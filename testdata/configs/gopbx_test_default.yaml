@@ -1,0 +1,34 @@
+version: "2.4"
+
+# This is just basic template used in testing
+  
+transports: 
+  udp:
+    transport: "udp"
+    bind: 127.0.0.1
+    port: {{.UDPPort}}
+
+
+
+endpoints:
+  # Handling any traffic can be just with mathc transport. If you want only with anonymous user then match by user
+
+  dialer: # Address of record
+    # routing: default
+    uri: {{.EndpointDialUri}}
+    match: 
+      # Match order user > IP
+      type: "ip"
+      values: ["127.0.0.1/32"]
+
+routes:
+  default: # Default context goes every call from all endpoints
+    - id: "recording" # E164 
+      endpoint: dialer
+      recording: true
+    - id: "123"
+      endpoint: dialer
+      recording: false
+    - id: "hangup404"
+      hangup:
+        code: 404
