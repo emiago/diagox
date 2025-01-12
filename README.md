@@ -1,7 +1,8 @@
 # gopbx
 GOPBX is modern, scalable and simple telephony solution built on top of sipgo and diago library.
 
-GOPBX goal will be to quickly bridge internal, external calls. 
+GOPBX goal will be to quickly bridge internal, external calls. Add you numbers (DID) or build extensions
+with scalable registry to handle high amount devices.
 
 Features:
 - Provides call history with full SIP traffic and voice quality monitoring. 
