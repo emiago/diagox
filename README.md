@@ -204,10 +204,8 @@ string SIPHostname   `env:"SIP_HOSTNAME" envDefault:""`
 
 ## Multi node running 
 
-**NOTE**: This is not yet stable and needs more testing. 
-
 Dependencies
 - MySQL - CDR/config storing
 - Redis - Registry/Dialog caching
 
-Will be shared soon.
+To be shared...
