@@ -1,5 +1,7 @@
 # diagox
 
+<img src="images/diagox-icon-blue.png" width="100" height="100" alt="GOPHONE">
+
 *Dialog Go Exchange*
 
 **diagox** is modern approach for simple Back To Back VOIP solution built on top of [sipgo](https://github.com/emiago/sipgo) and [diago](https://github.com/emiago/diago) library.
@@ -30,15 +32,25 @@ Ultimate goal is to allow you to scale your VOIP infrastructure, with monitoring
 
 ## Install 
 
-Application is single binary, you can just download from latest release and run it.
+Application is single binary, you can just [download](https://github.com/emiago/diagox/releases/latest/download/diagox) from latest release and run it.
 
-It needs `diagox.yaml` for configuring your routing and that is it. 
-Global configuration is done via env variables.
+Running:
+```bash
+wget https://github.com/emiago/diagox/releases/latest/download/diagox
+chmox +x diagox
+./diagox
+```
+
+It needs `diagox.yaml` for your routing configuration. Example below.
+```bash
+nano diagox.yaml
+```
 
 ## Configuration
 
 Configuration is simple based on yaml. This offers higher automation and easier managing.
 
+`diagox.yaml`
 ```yaml
 version: "2.4"
 
@@ -165,6 +177,8 @@ endpoints:
 
 ## Global configuration
 
+More features are offered using global configuration or toogling some features.
+
 ```go
 // Log formating.
 string  "LOG_LEVEL" envDefault:"info" // debug, info, warn, error
@@ -184,6 +198,8 @@ string   "RECORDINGS_PATH" envDefault:"recordings"
 bool     "FRONTEND_ENABLE" envDefault:"false"
 string   "SIP_BIND_IP" envDefault:""     // Useful for pods/nodes that have dedicated IP
 string   "SIP_EXTERNAL_IP" envDefault:"" // Useful for pods/nodes that have dedicated IP
+// SIP_HOSTNAME identifies that message are matching this hostname. Used in registrar for example
+string SIPHostname   `env:"SIP_HOSTNAME" envDefault:""`
 ```
 
 ## Multi node running 
@@ -194,4 +210,4 @@ Dependencies
 - MySQL - CDR/config storing
 - Redis - Registry/Dialog caching
 
-Will be shared
+Will be shared soon.
