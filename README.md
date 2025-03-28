@@ -5,7 +5,10 @@
 *Dialog Go Exchange*
 
 **diagox** is modern approach for simple Back To Back VOIP solution built on top of [sipgo](https://github.com/emiago/sipgo) and [diago](https://github.com/emiago/diago) library.
-Ultimate goal is to allow you to scale your VOIP infrastructure, with monitoring of all calls.
+
+It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale underhood API/VOIP services with
+full monitoring.
+
 
 **Main Features**:
 - Call Bridging with inbound/outbound routing and media proxy.
@@ -208,4 +211,4 @@ Dependencies
 - MySQL - CDR/config storing
 - Redis - Registry/Dialog caching
 
-To be shared...
+For more interest, will be shared...
