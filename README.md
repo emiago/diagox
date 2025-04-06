@@ -6,17 +6,19 @@
 
 **diagox** is modern approach for simple Back To Back VOIP solution built on top of [sipgo](https://github.com/emiago/sipgo) and [diago](https://github.com/emiago/diago) library.
 
-It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale underhood API/VOIP services with
-full monitoring.
+It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale underhood API/VOIP services with call monitoring, rate limiting and more.
 
 
 **Main Features**:
 - Call Bridging with inbound/outbound routing and media proxy.
-- Call history with full SIP traffic and voice quality monitoring, with GUI and API
+- Call history with full SIP traffic and voice quality monitoring, with GUI and API (WIP)
 - Optional: running in multi node for scaling and HA.
 
 
-> Project is free to use, and based on feedback it will be considered to take some path of development and maintance together with rest of Go VOIP libraries.
+> Project is free to use, but although used and tested in many scenaruos, it is considered still experimental. 
+
+> If interested to use this tool, support development, get latest updates ,,source code, roadmap, you can contact me on 
+[mail](mailto:emirfreelance91@gmail.com)
 
 
 ## Features
@@ -205,10 +207,23 @@ string   "SIP_EXTERNAL_IP" envDefault:"" // Useful for pods/nodes that have dedi
 string SIPHostname   `env:"SIP_HOSTNAME" envDefault:""`
 ```
 
+## Frontend (Work In Progress)
+
+Sharing just a peaks. 
+
+**NOTE**: Frontend is not active by default
+
+### History 
+
+Call history with VOIP metrics and data
+
+<img src="images/frontend-history.png"  height="150" alt="GOPHONE">
+<img src="images/frontend-history-rtp.png"  height="150" alt="GOPHONE">
+
 ## Multi node running 
 
 Dependencies
 - MySQL - CDR/config storing
 - Redis - Registry/Dialog caching
 
-For more interest, will be shared...
+> For more interest, will be shared...
