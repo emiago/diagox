@@ -6,7 +6,7 @@
 
 **diagox** is modern approach for simple Back To Back VOIP solution built on top of [sipgo](https://github.com/emiago/sipgo) and [diago](https://github.com/emiago/diago) library.
 
-It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale underhood API/VOIP services with call monitoring, rate limiting and more.
+It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale API/VOIP services with addition of call monitoring, rate limiting and more.
 
 
 **Main Features**:
@@ -15,7 +15,7 @@ It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale u
 - Optional: running in multi node for scaling and HA.
 
 
-> Project is free to use, but although used and tested in many scenaruos, it is considered still experimental. 
+> Project is free to use, but although used and tested in many scenarios, it is considered still experimental. 
 
 > If interested to use this tool, support development, get latest updates ,,source code, roadmap, you can contact me on 
 [mail](mailto:emirfreelance91@gmail.com)
