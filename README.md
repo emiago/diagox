@@ -11,13 +11,14 @@ It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale A
 
 **Main Features**:
 - Call Bridging with inbound/outbound routing and media proxy.
-- Call history with full SIP traffic and voice quality monitoring, with GUI and API (WIP)
+- Call history with full SIP traffic and voice quality monitoring
 - Optional: running in multi node for scaling and HA.
+- API and GUI for checking History and Other
 
 
 > Project is free to use, but although used and tested in many scenarios, it is considered still experimental. 
 
-> If interested to use this tool, support development, get latest updates ,,source code, roadmap, you can contact me on 
+> If interested to use this tool/service and supporting development, you can get latest updates, roadmap, code details. For all this you can contact me on 
 [mail](mailto:emirfreelance91@gmail.com)
 
 
