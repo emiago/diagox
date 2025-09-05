@@ -27,7 +27,7 @@ It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale A
 - Call bridging with no audio transcoding
 - Integrated Registrar to allow user registering and discovery
 - Call Rate Limiting / Inbound + Outbound
-- Simple routing and fast matching
+- Simple routing and matching
 - Fallback routing based on SIP Response
 - Endpoint IP/Auth identification
 - Call History with SIP Trace, RTCP metrics and Quality calculations
@@ -77,6 +77,13 @@ transports:
     transport: "udp"
     bind: 127.0.0.1
     port: 5099
+
+  # Secure WebSocket for WEBRTC Users
+  # TLS Configuration is done with envirment configuration
+  wss:
+    transport: "wss"
+    bind: 0.0.0.0
+    port: 5443
   
 # routes allow you to customize which endpoint your number should reach
 # - `default` route context is special one which is always used unless incoming endpoint did not override
@@ -126,12 +133,12 @@ routes:
   
   # Example when you want to route call but also do some fallback if initial endpoint/carrier failed
   with_fallback:
-    - id: 49
+    - id: 49 # Match all outgoing german numbers
       match: "prefix"
-      endpoint: carrier_primary
+      endpoint: carrier_external
       fallback: 
         codes: [401, 404, 487]
-        endpoints: ["carrier_second", "carrier_third"]   
+        endpoints: ["carrier_external_fallback_1", "carrier_external_fallback_2"]   
 
 # Endpoints define way to identify your incoming SIP traffic and which route to use.
 # Identifing is done with `match`. Supported values are: ip, user
@@ -164,7 +171,12 @@ endpoints:
       type: "ip"
       values: ["127.0.0.1/8"]
 
-  alice: # -> alice@tenant1.domain.com
+
+  # Using many carrier fallback endpoints
+  carrier_external_fallback_1: 
+  carrier_external_fallback_2:
+
+  alice:
     # routing: default # If not defined `default`` route is used
     match: 
       type: "user" 
@@ -172,13 +184,23 @@ endpoints:
       username: "alice" 
       password: "test123"    
 
-  bob: # -> alice@tenant1.domain.com
+  bob:
     match: 
       type: "user" 
     auth:
       username: "carrier" 
       password: "test123" 
-    
+  
+  # Example of WEBRTC User Endpoint Configuration
+  # normally you want to have WS(Websocket) endpoint configured for SIP.
+  webrtc:
+    match: 
+      type: "user" 
+    auth:
+      username: "webrtc" 
+      password: "webrtc" 
+    media:
+      type: "webrtc" # USE WEBRTC media stack instead standard!
 ```
 
 ## Global configuration
@@ -208,6 +230,14 @@ string   "SIP_EXTERNAL_IP" envDefault:"" // Useful for pods/nodes that have dedi
 string SIPHostname   `env:"SIP_HOSTNAME" envDefault:""`
 ```
 
+## APIs 
+
+| Path | Description |
+|------|-------------|
+| GET /api/v1/history | Read call recordings with Media stats
+
+[Open API Yaml](/http_openapi.yaml)
+
 ## Frontend (Work In Progress)
 
 Sharing just a peaks. 
@@ -228,3 +258,19 @@ Dependencies
 - Redis - Registry/Dialog caching
 
 > For more interest, will be shared...
+<<<<<<< HEAD
+=======
+
+
+# RFCs compatibility and wanted features
+
+- [x] SIP Dialog Handling B2B and RTP proxy media
+- [x] Early Media Support (183 Session In progress)
+- [x] Audio Codec alaw,ulaw,opus
+- [x] RTP Media and DTMF proxied
+- [ ] Transfer (SIP Refer) support
+- [ ] Jitter buffering
+- [ ] Webrtc Bridging 
+- [ ] Homer monitoring support
+- [ ] Audio Websocket Bridging with PCM support for internal services
+>>>>>>> e0e86fc (feat(webrtc): add configuration docs for WEBRTC support release)
