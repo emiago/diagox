@@ -30,6 +30,7 @@ It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale A
 - Simple routing and matching
 - Fallback routing based on SIP Response
 - Endpoint IP/Auth identification
+- SIP/RTP <-> SIP/WEBRTC bridging for Browser phones
 - Call History with SIP Trace, RTCP metrics and Quality calculations
 - Call Recording to WAV format / Mixed streams
 - Integrated monitoring with statsviz (only for debuging)
@@ -258,19 +259,3 @@ Dependencies
 - Redis - Registry/Dialog caching
 
 > For more interest, will be shared...
-<<<<<<< HEAD
-=======
-
-
-# RFCs compatibility and wanted features
-
-- [x] SIP Dialog Handling B2B and RTP proxy media
-- [x] Early Media Support (183 Session In progress)
-- [x] Audio Codec alaw,ulaw,opus
-- [x] RTP Media and DTMF proxied
-- [ ] Transfer (SIP Refer) support
-- [ ] Jitter buffering
-- [ ] Webrtc Bridging 
-- [ ] Homer monitoring support
-- [ ] Audio Websocket Bridging with PCM support for internal services
->>>>>>> e0e86fc (feat(webrtc): add configuration docs for WEBRTC support release)
