@@ -80,7 +80,7 @@ transports:
     port: 5099
 
   # Secure WebSocket for WEBRTC Users
-  # TLS Configuration is done with envirment configuration
+  # TLS Configuration is done with envirment configuration. Checkout SERVER_TLS_* env variables
   wss:
     transport: "wss"
     bind: 0.0.0.0
@@ -228,7 +228,12 @@ bool     "FRONTEND_ENABLE" envDefault:"false"
 string   "SIP_BIND_IP" envDefault:""     // Useful for pods/nodes that have dedicated IP
 string   "SIP_EXTERNAL_IP" envDefault:"" // Useful for pods/nodes that have dedicated IP
 // SIP_HOSTNAME identifies that message are matching this hostname. Used in registrar for example
-string SIPHostname   `env:"SIP_HOSTNAME" envDefault:""`
+string "SIP_HOSTNAME" envDefault:""
+// SIP SERVER TLS configuration
+string "SERVER_TLS_KEY" envDefault:"" // Base64 encoded key
+string "SERVER_TLS_CRT" envDefault:"" // Base64 encoded crt
+string "SERVER_TLS_KEY_PATH" envDefault:""
+string "SERVER_TLS_CRT_PATH" envDefault:""
 ```
 
 ## APIs 
