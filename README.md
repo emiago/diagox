@@ -18,7 +18,7 @@ It can be seen like **Ingress** Service for **SIP/RTP**, to allow you to scale A
 
 > Project is free to use, but although used and tested in many scenarios, it is considered still experimental. 
 
-> If interested to use this tool/service and supporting development, you can get latest updates, roadmap, code details. For all this you can contact me on 
+> **NOT Open Source** in standard way. If interested to use this tool/service and supporting development, you can get latest updates, roadmap, code details. For all this you can contact me on 
 [mail](mailto:emirfreelance91@gmail.com)
 
 
