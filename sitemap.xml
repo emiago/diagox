@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/diagox/docs/install/</loc>
+    <loc>https://emiago.github.io/diagox/docs/install/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/docs/call_history/</loc>
+    <loc>https://emiago.github.io/diagox/docs/call_history/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/docs/webrtc/</loc>
+    <loc>https://emiago.github.io/diagox/docs/webrtc/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/docs/agent_rpc/</loc>
+    <loc>https://emiago.github.io/diagox/docs/agent_rpc/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/</loc>
+    <loc>https://emiago.github.io/diagox/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/blog/</loc>
+    <loc>https://emiago.github.io/diagox/blog/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/docs/</loc>
+    <loc>https://emiago.github.io/diagox/docs/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/categories/</loc>
+    <loc>https://emiago.github.io/diagox/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/diagox/tags/</loc>
+    <loc>https://emiago.github.io/diagox/tags/</loc>
   </url>
 </urlset>

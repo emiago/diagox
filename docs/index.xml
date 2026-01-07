@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Diagox – </title>
-    <link>http://localhost:1313/diagox/docs/</link>
+    <link>https://emiago.github.io/diagox/docs/</link>
     <description>Recent content on Diagox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	  <atom:link href="http://localhost:1313/diagox/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://emiago.github.io/diagox/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,14 +16,14 @@
     
     <item>
       <title>Install</title>
-      <link>http://localhost:1313/diagox/docs/install/</link>
+      <link>https://emiago.github.io/diagox/docs/install/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/diagox/docs/install/</guid>
+      <guid>https://emiago.github.io/diagox/docs/install/</guid>
       <description>
         
         
-        &lt;p&gt;Application is single binary, you can just &lt;a href=&#34;https://github.com/emiago/diagox/releases/latest/download/diagox&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;download&lt;/a&gt; from latest release and run it.&lt;/p&gt;
+        &lt;p&gt;Application is single binary, you can just &lt;a href=&#34;https://github.com/emiago/diagox/releases/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;download&lt;/a&gt; from latest release and run it.&lt;/p&gt;
 &lt;p&gt;Running:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
   
@@ -306,10 +306,10 @@ Although this could be part of yaml, changing env var is generally eaiser and fa
     
     <item>
       <title>Call history</title>
-      <link>http://localhost:1313/diagox/docs/call_history/</link>
+      <link>https://emiago.github.io/diagox/docs/call_history/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/diagox/docs/call_history/</guid>
+      <guid>https://emiago.github.io/diagox/docs/call_history/</guid>
       <description>
         
         
@@ -349,10 +349,10 @@ You can find this values as well when clicking any record.
     
     <item>
       <title>WebRTC</title>
-      <link>http://localhost:1313/diagox/docs/webrtc/</link>
+      <link>https://emiago.github.io/diagox/docs/webrtc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/diagox/docs/webrtc/</guid>
+      <guid>https://emiago.github.io/diagox/docs/webrtc/</guid>
       <description>
         
         
@@ -398,10 +398,10 @@ You can find this values as well when clicking any record.
     
     <item>
       <title>Agent RPC Protocol</title>
-      <link>http://localhost:1313/diagox/docs/agent_rpc/</link>
+      <link>https://emiago.github.io/diagox/docs/agent_rpc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/diagox/docs/agent_rpc/</guid>
+      <guid>https://emiago.github.io/diagox/docs/agent_rpc/</guid>
       <description>
         
         
