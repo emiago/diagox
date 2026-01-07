@@ -1,0 +1,16 @@
+table.mytable {
+    border-collapse: collapse;
+}
+
+a.button {
+    /* display: block; */
+    padding:
+    10px;
+    border:
+    1px solid white;
+    border-radius:
+    5px;
+    text-align: center;
+    font-size: 1.5rem;
+    text-decoration-line: none;
+}

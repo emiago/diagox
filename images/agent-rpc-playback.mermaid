@@ -1,0 +1,10 @@
+sequenceDiagram
+    Diagox->>+Agent: invite
+    Agent->>-Diagox: 200 OK
+    Agent->>+Diagox: answer 
+    Diagox->>-Agent: 200 OK
+    Agent->>+Diagox: play http://somefile.wav
+    Diagox-->>Agent: 183 Playback in Progress
+    Diagox->>-Agent: 200 OK
+    Agent->>+Diagox: redirect endpoint=voicebot
+    Diagox->>-Agent: 200 OK
