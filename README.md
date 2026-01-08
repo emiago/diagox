@@ -27,9 +27,9 @@ Learn more about [ALL features it supports](https://emiago.github.io/diagox/docs
 
 ### License/Code
 
-Project is free to use, but although used and tested in many scenarios, it is considered not production ready. 
+Project is free to use, but although used and tested in many scenarios, it is considered not production ready. License is provided in this repo.
 
-> **NOT Open Source** currently in a standard way. If you are interested to use this tool/service, providing feedback and supporting development, more direct collaboration can be made. This will get you latest updates, roadmap, source code and more. For all of this you can contact me on 
+> **NOT Open Source** currently in standard way. Reason is to provide more focused development for personal or interested parties. If you are interested to use this tool/service, providing feedback and supporting/sponzoring development, more direct collaboration can be made. This will get you latest updates, roadmap, source code and more. For all of this you can contact me on 
 [mail](mailto:emirfreelance91@gmail.com)
 
 
