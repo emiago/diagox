@@ -12,10 +12,10 @@
 <link fetchpriority="low" href="/diagox/site.webmanifest" rel="manifest" />
 
   <title>Install – Diagox</title>
-  <meta name="description" content="Application is single binary, you can just download from latest release and run it.
+  <meta name="description" content="Supported arch:
+Linux amd64 Linux arm64 Application is single binary(linux amd64 default), you can just download from latest release and run it.
 Running:
-wget https://github.com/emiago/diagox/releases/latest/download/diagox chmox &#43;x diagox ./diagox or you can use docker image:
-docker run --rm -it emiago/diagox Configuration Configuration is simple based on yaml. This offers higher automation and easier managing. You define transport,endpoints and routes in configuration. Here is sample of almost all possible current configurations:" />
+wget https://github.com/emiago/diagox/releases/latest/download/diagox chmox &#43;x diagox ./diagox or you can use docker image:" />
 
   
     <link rel="canonical" href="https://emiago.github.io/diagox/docs/install/" itemprop="url" />
@@ -24,7 +24,12 @@ docker run --rm -it emiago/diagox Configuration Configuration is simple based on
   
 
 <meta property="og:title" content="Install" />
-<meta property="og:description" content="Application is single binary, you can just download from latest release and run it.
+<meta property="og:description" content="Supported arch:
+
+Linux amd64
+Linux arm64
+
+Application is single binary(linux amd64 default), you can just download from latest release and run it.
 Running:
 
   
@@ -40,23 +45,7 @@ chmox &#43;x diagox
 
   
 
-or you can use docker image:
-
-  
-
-docker run --rm -it emiago/diagox
-  
-    
-    
-  
-
-
-  
-
-Configuration
-    Configuration is simple based on yaml. This offers higher automation and easier managing.
-You define transport,endpoints and routes in configuration.
-Here is sample of almost all possible current configurations:" />
+or you can use docker image:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://emiago.github.io/diagox/docs/install/" /><meta property="article:section" content="docs" />
 
@@ -64,17 +53,17 @@ Here is sample of almost all possible current configurations:" />
 
   
   <meta itemprop="name" content="Install">
-  <meta itemprop="description" content="Application is single binary, you can just download from latest release and run it.
+  <meta itemprop="description" content="Supported arch:
+Linux amd64 Linux arm64 Application is single binary(linux amd64 default), you can just download from latest release and run it.
 Running:
-wget https://github.com/emiago/diagox/releases/latest/download/diagox chmox &#43;x diagox ./diagox or you can use docker image:
-docker run --rm -it emiago/diagox Configuration Configuration is simple based on yaml. This offers higher automation and easier managing. You define transport,endpoints and routes in configuration. Here is sample of almost all possible current configurations:">
-  <meta itemprop="wordCount" content="911">
+wget https://github.com/emiago/diagox/releases/latest/download/diagox chmox &#43;x diagox ./diagox or you can use docker image:">
+  <meta itemprop="wordCount" content="938">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Install">
-  <meta name="twitter:description" content="Application is single binary, you can just download from latest release and run it.
+  <meta name="twitter:description" content="Supported arch:
+Linux amd64 Linux arm64 Application is single binary(linux amd64 default), you can just download from latest release and run it.
 Running:
-wget https://github.com/emiago/diagox/releases/latest/download/diagox chmox &#43;x diagox ./diagox or you can use docker image:
-docker run --rm -it emiago/diagox Configuration Configuration is simple based on yaml. This offers higher automation and easier managing. You define transport,endpoints and routes in configuration. Here is sample of almost all possible current configurations:">
+wget https://github.com/emiago/diagox/releases/latest/download/diagox chmox &#43;x diagox ./diagox or you can use docker image:">
 
     <link rel="preload" href="/diagox/css/compiled/main.min.23a12191daf50c320fcb5ce50e8c895a47f37ce361f66be7c771e19f254b32b2.css" as="style" integrity="sha256-I6Ehkdr1DDIPy1zlDoyJWkfzfONh9mvnx3HhnyVLMrI=" />
     <link href="/diagox/css/compiled/main.min.23a12191daf50c320fcb5ce50e8c895a47f37ce361f66be7c771e19f254b32b2.css" rel="stylesheet" integrity="sha256-I6Ehkdr1DDIPy1zlDoyJWkfzfONh9mvnx3HhnyVLMrI=" />
@@ -365,7 +354,12 @@ docker run --rm -it emiago/diagox Configuration Configuration is simple based on
 
         <div class="content">
           <h1>Install</h1>
-          <p>Application is single binary, you can just <a href="https://github.com/emiago/diagox/releases/latest" target="_blank" rel="noopener">download</a> from latest release and run it.</p>
+          <p>Supported arch:</p>
+<ul>
+<li>Linux amd64</li>
+<li>Linux arm64</li>
+</ul>
+<p>Application is single binary(linux amd64 default), you can just <a href="https://github.com/emiago/diagox/releases/latest" target="_blank" rel="noopener">download</a> from latest release and run it.</p>
 <p>Running:</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
   
@@ -388,7 +382,10 @@ docker run --rm -it emiago/diagox Configuration Configuration is simple based on
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
   
 
-<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run --rm -it emiago/diagox</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run --rm -it emiago/diagox
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># With mounting config</span>
+</span></span><span class="line"><span class="cl">docker run --rm -it emiago/diagox -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/diagox.yaml:/app/diagox.yaml</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -400,6 +397,7 @@ docker run --rm -it emiago/diagox Configuration Configuration is simple based on
 
   
 </div>
+<p>For other archs plese check on <a href="https://github.com/emiago/diagox/releases" target="_blank" rel="noopener">latest releases</a></p>
 <h2>Configuration<span class="hx-absolute -hx-mt-20" id="configuration"></span>
     <a href="#configuration" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Configuration is simple based on yaml. This offers higher automation and easier managing.
 You define transport,endpoints and routes in configuration.
