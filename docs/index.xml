@@ -406,22 +406,21 @@ You can find this values as well when clicking any record.
     </item>
     
     <item>
-      <title>Agent RPC Protocol</title>
-      <link>https://emiago.github.io/diagox/docs/agent_rpc/</link>
+      <title>Call Flow API Protocol</title>
+      <link>https://emiago.github.io/diagox/docs/flow_rpc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://emiago.github.io/diagox/docs/agent_rpc/</guid>
+      <guid>https://emiago.github.io/diagox/docs/flow_rpc/</guid>
       <description>
         
         
         &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: Feature is in Experimental stage and design may change!&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Agent RPC Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs&lt;/p&gt;
-&lt;p&gt;Agent RPC is &lt;strong&gt;JSON protocol over Websocket&lt;/strong&gt; and it is very close to SIP as it is all based on Request/Response transactions.
+&lt;p&gt;Call Flow API Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs&lt;/p&gt;
+&lt;p&gt;Call Flow API is &lt;strong&gt;JSON RPC protocol over Websocket&lt;/strong&gt; and it is very close to SIP as it is all based on Request/Response transactions.
 This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.&lt;/p&gt;
-&lt;p&gt;Unlike some other systems it is designed as well that you can achieve &lt;strong&gt;redundancy&lt;/strong&gt; or even &lt;strong&gt;load balancing&lt;/strong&gt;.
-So&lt;/p&gt;
+&lt;p&gt;Unlike some other systems it is designed as well that you can achieve &lt;strong&gt;redundancy&lt;/strong&gt; or even &lt;strong&gt;load balancing&lt;/strong&gt;.&lt;/p&gt;
 &lt;h3&gt;Use cases&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;use-cases&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#use-cases&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;API allows very simple actions and mainly intention is that you are able to influence on the routing of call.
 Here are some use cases that we find useful:&lt;/p&gt;
@@ -433,26 +432,32 @@ Here are some use cases that we find useful:&lt;/p&gt;
 &lt;li&gt;Autoscaling underhood systems&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Protocol&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;protocol&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#protocol&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Protocol is request/response transactions as P2P communication.&lt;/p&gt;
+    &lt;a href=&#34;#protocol&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;NOTE on Terms:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Agent&lt;/strong&gt; - is endpoint or user agent that comunicates over call flow API&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Transaction&lt;/strong&gt; - is single exchange of req/response and it is terminated with final response or responses with &amp;gt;2xx status code&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;P2P&lt;/strong&gt; - peer to peer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Protocol is request/response transactions as P2P communication.&lt;/p&gt;
 &lt;p&gt;All transactions/sessions are multiplexed over single WS connection, but to make this easier, SDKs will be provided&lt;/p&gt;
 &lt;h3&gt;SDKs supported:&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;sdks-supported&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#sdks-supported&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/emiago/diagox-agent-sdk-js&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NodeJS - diagox-agent-sdk-js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/emiago/diagox-flow-sdk-js&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NodeJS - diagox-flow-sdk-js&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Go&lt;/strong&gt; - TODO&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Connecting&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;connecting&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#connecting&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Agent must connect (we may implement other way arround) to websocket
 server on port (default) &lt;code&gt;6000&lt;/code&gt;, and use &lt;code&gt;endpoint&lt;/code&gt; parameter for endpoint unique name.&lt;/p&gt;
 &lt;p&gt;Example with wscat tool:
-&lt;code&gt;wscat --connect ws://localhost:6000\?endpoint=myagent&lt;/code&gt;&lt;/p&gt;
+&lt;code&gt;wscat --connect ws://localhost:6000\?endpoint=flowagent&lt;/code&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: DO NOT EXPOSE THIS PORT as there is no yet auth system.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;You can &lt;strong&gt;connect many agents&lt;/strong&gt; with same endpoint ID, where in this case traffic will be randomly load balanced.&lt;/p&gt;
 &lt;h3&gt;Example&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;example&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#example&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Here simple use case of answering a call and running playback and redirecting&lt;/p&gt;
-&lt;img src=&#34;agent-rpc-playback.png&#34; width=&#34;600&#34; height=&#34;600&#34; alt=&#34;agentrpc&#34;&gt;
-&lt;p&gt;Diagox has endpoint &lt;code&gt;myagent&lt;/code&gt; and &lt;code&gt;voicebot&lt;/code&gt; configuration for routing:&lt;/p&gt;
+&lt;img src=&#34;flow-rpc-playback.png&#34; width=&#34;600&#34; height=&#34;600&#34; alt=&#34;flowrpc&#34;&gt;
+&lt;p&gt;Diagox has endpoint &lt;code&gt;flowagent&lt;/code&gt; and &lt;code&gt;voicebot&lt;/code&gt; configuration for routing:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
   
 
@@ -465,9 +470,9 @@ server on port (default) &lt;code&gt;6000&lt;/code&gt;, and use &lt;code&gt;endp
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;voicebot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# Address of record&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;uri&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;sip:voicebot:5080&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;myagent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;flowagent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;match&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;agent&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;flow&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -531,7 +536,7 @@ server on port (default) &lt;code&gt;6000&lt;/code&gt;, and use &lt;code&gt;endp
 
   
 &lt;/div&gt;
-&lt;h2&gt;Diagox requests&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;diagox-requests&#34;&gt;&lt;/span&gt;
+&lt;h2&gt;Diagox Requests&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;diagox-requests&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#diagox-requests&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;For incoming call Diagox will send &lt;code&gt;invite&lt;/code&gt; request for agent to accept or not.
 In case of not accepting depending on response diagox can send this
 invite to other agent if loadbalancing is in place.&lt;/p&gt;
@@ -547,7 +552,7 @@ Payload:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3&gt;bye&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;bye&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#bye&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Indication that call is exiting either due to remote hangup, agent hangup or redirect.&lt;/p&gt;
-&lt;h2&gt;Agent requests&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;agent-requests&#34;&gt;&lt;/span&gt;
+&lt;h2&gt;Agent Requests&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;agent-requests&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#agent-requests&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;ring&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;ring&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#ring&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Starts ring with SIP 180.&lt;/p&gt;
 &lt;h3&gt;answer&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;answer&#34;&gt;&lt;/span&gt;
@@ -569,6 +574,12 @@ Payload:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;duration_sec&lt;/code&gt; - how long to wait for dtmf(s) in seconds&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;termination&lt;/code&gt; - stop on this termination digit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;listen&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;listen&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#listen&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Records shorts audio in wav. Sent over binary frames.
+Payload:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;duration_sec&lt;/code&gt; - how long to wait (Max 30sec)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;hangup&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;hangup&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#hangup&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Hangups a call.&lt;/p&gt;
