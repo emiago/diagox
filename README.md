@@ -15,7 +15,7 @@ Docs and more information you find on [website](https://emiago.github.io/diagox)
 - [Getting started](https://emiago.github.io/diagox/docs/)
 - [Install](https://emiago.github.io/diagox/docs/install/)
 - [WebRTC](https://emiago.github.io/diagox/docs/webrtc/)
-- [Agent RPC (Experimental)](https://emiago.github.io/diagox/docs/agent_rpc/)
+- [Flow API RPC](https://emiago.github.io/diagox/docs/agent_rpc/)
 
 
 ### Features
