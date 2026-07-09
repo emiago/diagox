@@ -1,6 +1,6 @@
 # diagox
 
-<img src="images/diagox-icon-blue.png" width="150" height="150" alt="GOPHONE">
+<img src="images/diagox-icon.png" width="150" height="150" alt="GOPHONE">
 
 Diagox = *Dialog Go Exchange*
 ---
@@ -15,7 +15,6 @@ Docs and more information you find on [website](https://emiago.github.io/diagox)
 - [Getting started](https://emiago.github.io/diagox/docs/)
 - [Install](https://emiago.github.io/diagox/docs/install/)
 - [WebRTC](https://emiago.github.io/diagox/docs/webrtc/)
-- [Flow API RPC](https://emiago.github.io/diagox/docs/agent_rpc/)
 
 
 ### Features
@@ -25,12 +24,18 @@ As well it can be seen as SIP Dialog proxy it is also provides functionality for
 Learn more about [ALL features it supports](https://emiago.github.io/diagox/docs/#features)
 
 
-### License/Code
+## Open Source vs Closed (Scalable) 
 
-Project is free to use, but although used and tested in many scenarios, it is considered not production ready. License is provided in this repo.
+Current Open source instance is single binary version not scalable. 
+Scalable (Enterprise) version is closed source. SOON More about to be shared, but here are features
 
-> **NOT Open Source** currently in standard way. Reason is to provide more focused development for personal or interested parties. If you are interested to use this tool/service, providing feedback and supporting/sponzoring development, more direct collaboration can be made. This will get you latest updates, roadmap, source code and more. For all of this you can contact me on 
-[mail](mailto:emirfreelance91@gmail.com)
+### FEATURES
+
+* Multi instance diagox
+* Kubernetes ready chart
+* Registry with External Cache
+* CDRs in database
+* Frontend for all instances and Ingress setup
 
 
 
