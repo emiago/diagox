@@ -1,6 +1,6 @@
 # diagox
 
-<img src="images/diagox-icon.png" width="150" height="150" alt="GOPHONE">
+<img src="images/diagox-icon.png" width="150" height="150" alt="DIAGOX">
 
 Diagox = *Dialog Go Exchange*
 ---
