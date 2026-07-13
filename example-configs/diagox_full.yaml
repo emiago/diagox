@@ -1,0 +1,118 @@
+version: "2.4"
+
+
+# transports for SIP
+transports: 
+  udp:
+    transport: "udp"
+    bind: 0.0.0.0
+    port: 5060
+    external_host: my.domain.com # Use env SIP_EXTERNAL_HOST to set for all transports
+    external_media_ip: 1.2.3.4 # Use env SIP_EXTERNAL_MEDIA_IP to set for all transports
+  tcp:
+    transport: "tcp"
+    bind: 0.0.0.0
+    port: 5060
+  udp_local:
+    transport: "udp"
+    bind: 127.0.0.1
+    port: 5099
+  
+# routes allow you to customize which endpoint your number should reach
+# - `default` route context is special one which is always used unless incoming endpoint did not override
+# - you can create more routes and split logic as you like
+# - keeping route context small can improve call route matching
+routes:
+  # Default context goes every call from all endpoints
+  # If not created or overided it has this configuration
+  default:
+    - id: ""
+      match: "any" # Match any number
+      use_registry: true # Check registry. Any register user will be reached
+
+  incoming: 
+    # Order here matters 
+    # Required fields are: id and endpoint
+
+    # Example with strict number matching
+    - id: "4912345678" 
+      endpoint: carrier_internal # On which endpoint to send
+
+    # Example with prefix matching
+    - id: "381"
+      match: prefix
+      endpoint: carrier_internal
+
+    # Example with prefix matching and passing SIP headers
+    - id: "121"
+      match: prefix
+      endpoint: carrier_internal
+      # sip_headers_pass are copied from incoming call to outgoing. Not usable for dialog headers like Via From To etc...
+      sip_headers_pass: ["X-Myheader", "X-Account-ID"] 
+      # sip_headers will always set this header. Useful if you want to attach some static information
+      sip_headers: 
+        X-Fixed-Header: "Call121"
+
+  # Example of outgoing where you want to have your internal endpoint route calls out
+  outgoing: 
+    - id: "987" 
+      match: "prefix"
+      endpoint: carrier_external
+
+    # Example where to match all if did not match any of previous
+    # Instead of endpoint we just want to hangup call. This is where hangup module is provided
+    - id: ""
+      match: "any" #Match all
+      hangup:
+        code: 404
+  
+# Endpoints define way to identify your incoming SIP traffic and which route to use.
+# Identifing is done with `match`. Supported values are: ip, user
+# - `ip` is your incoming source IP
+# - `user` matches by SIP From header and USER property  ex. From: <sip:$USER@example.com>
+# Match order is: user, ip
+endpoints:
+  carrier_external:
+    route: incoming
+    match: 
+      type: "ip" 
+      values: ["192.168.0.0/24"]
+    
+    # Auth will identify incoming SIP INVITE/REGISTER additionally with Digest authentication
+    auth:
+      username: "test" 
+      password: "test123"
+
+    # Uri is for your outgoing or how to reach this carrier. 
+    # If you use this endpoint in routes, this SIP uri will be used to reach. User part is replaced by caller ID.
+    uri: "sip:carrier.external.com:5080"
+    transport: tcp # You can force which transport to use. This is id of transport defined in transports
+  
+  carrier_internal:
+    # When matched call will be sent to outgoing route
+    route: outgoing
+
+    # Incoming options
+    match: 
+      type: "ip"
+      values: ["127.0.0.1/8"]
+
+  alice: # -> alice@tenant1.domain.com
+    # routing: default # If not defined `default`` route is used
+    match: 
+      type: "user" 
+    auth:
+      username: "alice" 
+      password: "test123"    
+
+  bob: # -> alice@tenant1.domain.com
+    match: 
+      type: "user" 
+    auth:
+      username: "carrier" 
+      password: "test123" 
+    
+
+
+
+

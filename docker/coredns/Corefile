@@ -1,0 +1,30 @@
+. {
+    log
+    errors
+    hosts {
+        172.30.0.10 gopbx-1.coredns.local
+        172.30.0.20 gopbx-2.coredns.local
+        127.0.0.1 localhost.coredns.local
+        172.30.0.1 gateway.coredns.local
+        # fallthrough
+    }
+    template IN SRV {
+        match .*_sip.(_udp|_tcp).gopbx.coredns.local
+        answer "{{ .Name }} 60 IN SRV 10 50 5060 gopbx-1.coredns.local"
+        answer "{{ .Name }} 60 IN SRV 10 50 5060 gopbx-2.coredns.local"
+    }
+
+    # A records for the proxy nodes. This can not be used with hosts
+    # template IN A {
+    #     match gopbx-1.coredns.local
+    #     answer "{{ .Name }} 60 IN A 172.30.0.10"
+    # }
+    # template IN A {
+    #     match gopbx-2.coredns.local
+    #     answer "{{ .Name }} 60 IN A 172.30.0.20"
+    # }
+    # template IN A {
+    #     match localhost.coredns.local
+    #     answer "{{ .Name }} 60 IN A 127.0.0.1"
+    # }
+}

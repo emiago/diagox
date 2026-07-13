@@ -23,7 +23,7 @@ ENV CGO_ENABLED=0
 # RUN apk add --no-cache sngrep
 
 COPY diagox .
-COPY example-configs/diagox_example.yaml ./diagox.yaml
+COPY example-configs/diagox-minimal.yaml ./diagox.yaml
 # RUN go install github.com/go-delve/delve/cmd/dlv@latest
 # RUN go env && go mod download
 # ENTRYPOINT [ "./diagox" ]
@@ -33,4 +33,3 @@ CMD [ "./diagox" ]
 # ENTRYPOINT ["dlv", "--listen=${dlv_port}", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "./main"]
 # ENTRYPOINT [ "dlv", "debug", ".", "--"]
 # CMD ["-server"]
-

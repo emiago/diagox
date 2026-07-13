@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<scenario name="SIP REGISTER with Multiple Users">
+  <variables>
+    <variable name="username" file="users.csv" />
+    <variable name="password" file="users.csv" column="1"/>
+  </variables>
+
+  <!-- Initial REGISTER -->
+  <send>
+    <![CDATA[
+    REGISTER sip:[remote_ip]:[remote_port] SIP/2.0
+    Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+    Max-Forwards: 70
+    To: <sip:[username]@[remote_ip]>
+    From: <sip:[username]@[remote_ip]>;tag=[call_number]
+    Call-ID: [call_id]
+    CSeq: 1 REGISTER
+    Contact: <sip:[username]@[local_ip]:[local_port]>
+    Expires: 3600
+    Content-Length: 0
+    ]]>
+  </send>
+
+  <!-- Expect 401 Unauthorized -->
+  <recv response="401"/>
+
+  <!-- REGISTER with Authentication -->
+  <send>
+    <![CDATA[
+    REGISTER sip:[remote_ip]:[remote_port] SIP/2.0
+    Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+    Max-Forwards: 70
+    To: <sip:[username]@[remote_ip]>
+    From: <sip:[username]@[remote_ip]>;tag=[call_number]
+    Call-ID: [call_id]
+    CSeq: 2 REGISTER
+    Contact: <sip:[username]@[local_ip]:[local_port]>
+    Authorization: Digest username="[username]", realm="asterisk", nonce="[nonce]", uri="sip:[remote_ip]", response="[md5]"
+    Expires: 60
+    Content-Length: 0
+    ]]>
+  </send>
+
+  <!-- Expect 200 OK -->
+  <recv response="200"/>
+
+  <!-- Wait before sending the refresh (e.g., at 50% of expiration time) -->
+  <pause milliseconds="30000"/> <!-- 30 seconds for a 1-minute expiration -->
+
+  <!-- Refresh REGISTER -->
+  <send>
+    <![CDATA[
+    REGISTER sip:[remote_ip]:[remote_port] SIP/2.0
+    Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+    Max-Forwards: 70
+    To: <sip:[username]@[remote_ip]>
+    From: <sip:[username]@[remote_ip]>;tag=[call_number]
+    Call-ID: [call_id]
+    CSeq: 3 REGISTER
+    Contact: <sip:[username]@[local_ip]:[local_port]>
+    Authorization: Digest username="[username]", realm="asterisk", nonce="[nonce]", uri="sip:[remote_ip]", response="[md5]"
+    Expires: 60
+    Content-Length: 0
+    ]]>
+  </send>
+
+  <!-- Expect 200 OK for refresh -->
+  <recv response="200"/>
+</scenario>

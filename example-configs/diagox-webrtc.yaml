@@ -1,0 +1,59 @@
+version: "2.4"
+
+transports: 
+  udp:
+    transport: "udp"
+    bind: 0.0.0.0
+    port: 5060
+  ws:
+    transport: "ws"
+    bind: 127.0.0.1
+    port: 5442
+    rewrite_contact: true # Fixes problem for peers sending invalid
+#  wss:
+#    transport: "wss"
+#    bind: 0.0.0.0
+#    port: 5443
+#    rewrite_contact: true # Fixes problem for peers sending invalid
+
+routes:
+  default: # Default context goes every call from all endpoints
+    - id: "webrtc"
+      endpoint: webrtc
+    - id: "record"
+      match: "any"
+      recording: true
+      endpoint: bob
+    - id: ""
+      match: "any"
+      endpoint: bob
+  
+
+endpoints:
+  alice:
+    # Incoming options
+    match: 
+      type: "ip"
+      values: ["127.0.0.1/24"]
+
+  bob: # Address of record
+    uri: "sip:localhost:5080" # Uri is for outgoing, but we only need host and port
+
+  webrtc:
+    match: 
+      type: "user" 
+    auth:
+      # username: "webrtc" 
+      # password: "webrtc" 
+    media:
+      type: "webrtc" # rtp is default
+
+  out_webrtc:
+    match: 
+      type: "user" 
+    auth:
+      username: "webrtc" 
+      password: "webrtc" 
+    media:
+      type: "webrtc" # rtp is default
+

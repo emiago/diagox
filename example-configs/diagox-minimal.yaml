@@ -1,0 +1,28 @@
+version: "2.4"
+
+transports: 
+  udp:
+    transport: "udp"
+    bind: 0.0.0.0
+    port: 5060
+
+routes:
+  default: # Default context goes every call from all endpoints
+    - id: "record"
+      match: "any"
+      recording: true
+      endpoint: bob
+    - id: ""
+      match: "any"
+      endpoint: bob
+
+endpoints:
+  alice:
+    # Incoming options
+    match: 
+      type: "ip"
+      values: ["127.0.0.1/24"]
+
+  bob: # Address of record
+    uri: "sip:internal.network:5080" # Uri is for outgoing, but we only need host and port
+    contact_header: "<sip:override@127.0.0.1:5060;id=1;+sip_instance=123>"
