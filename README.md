@@ -114,7 +114,7 @@ it possible to adapt the same gateway to different networks and providers.
 The open-source Diagox distribution provides a focused, single-instance voice
 gateway that can be run as a binary or container.
 
-Scalable (enterprise) capabilities are available separately for deployments
+Scalable capabilities are available separately for deployments
 that need:
 
 - Multiple coordinated Diagox instances
@@ -123,8 +123,8 @@ that need:
 - Database-backed call detail records
 - Centralized management of instances and ingress configuration
 
-For more information about scalable (enterprise) deployments, contact
-[emirfreelance91@gmail.com](mailto:emirfreelance91@gmail.com).
+For more information about scalable deployments, contact
+[mail](mailto:emirfreelance91@gmail.com).
 
 ## Development
 
