@@ -24,3 +24,6 @@
 /devspace.yaml
 /diagox-enterprise
 /docker-compose*
+
+# Docker directory
+/docker/
