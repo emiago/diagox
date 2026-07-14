@@ -21,8 +21,8 @@ import (
 	"net/http/httputil"
 	_ "net/http/pprof"
 
-	"github.com/arl/statsviz"
 	"github.com/emiago/diago"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 //go:embed frontend
@@ -82,19 +82,8 @@ func isJsonRequest(r *http.Request) bool {
 }
 
 func httpServer(_ context.Context, addr string, h *Handler) {
-	mux := http.DefaultServeMux
-
-	if err := statsviz.Register(mux,
-		statsviz.TimeseriesPlot(plotNumberOfCalls()),
-		statsviz.TimeseriesPlot(plotRoundTripTime()),
-		statsviz.TimeseriesPlot(plotJitter()),
-		statsviz.TimeseriesPlot(plotFractionLoss()),
-		statsviz.TimeseriesPlot(plotPacketsCount()),
-		statsviz.SendFrequency(5*time.Second),
-	); err != nil {
-		log.Error("failed statsviz", "error", err)
-		return
-	}
+	mux := http.NewServeMux()
+	mux.Handle("GET /metrics", promhttp.Handler())
 
 	// Connect to a server
 	// nc := func() *nats.Conn {

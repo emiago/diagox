@@ -112,8 +112,12 @@ func (pbx *PBX) handler(inDialog *diago.DialogServerSession) {
 		defer rl.DialogActiveDec()
 	}
 
-	metricNumberOfCallsActive.Add(1)
-	defer metricNumberOfCallsActive.Add(-1)
+	metricDialogsStarted.Inc()
+	metricDialogsActive.Inc()
+	defer func() {
+		metricDialogsActive.Dec()
+		metricDialogsEnded.Inc()
+	}()
 
 	pbx.registerOnStateDialog(inDialog)
 
@@ -131,6 +135,7 @@ func (pbx *PBX) handler(inDialog *diago.DialogServerSession) {
 	disposition := "NOANSWER"
 	inDialog.OnState(func(s sip.DialogState) {
 		if s == sip.DialogStateConfirmed {
+			metricDialogsAnswered.Inc()
 			disposition = "ANSWER"
 		}
 	})
@@ -1191,38 +1196,27 @@ func onReadRTCP(stats *DialogMediaStats) func(pkt rtcp.Packet, rtpStats media.RT
 		stats.PacketsReadCount = rtpStats.PacketsCount
 
 		if sr, ok := pkt.(*rtcp.SenderReport); ok {
-			metricMediaReadRTPPackets.Add(int64(sr.PacketCount))
+			metricRTPPacketsRead.Add(float64(sr.PacketCount))
 			if len(sr.Reports) > 0 {
 				rr := sr.Reports[0]
-
-				// expect mono 8000 rate
-				jittDur := time.Duration(float64(rr.Jitter) / float64(rtpStats.SampleRate) * float64(time.Second))
-				stats.MaxJitter = max(stats.MaxJitter, jittDur)
-
 				stats.PacketsReadLost = rr.TotalLost
+				sampleRate := rtpStats.SampleRate
+				if sampleRate == 0 {
+					sampleRate = 8000
+				}
+				jitterDuration := time.Duration(float64(rr.Jitter) / float64(sampleRate) * float64(time.Second))
+				stats.MaxJitter = max(stats.MaxJitter, jitterDuration)
+
+				jitterSeconds := float64(rr.Jitter) / float64(sampleRate)
+				metricRTPJitter.Observe(jitterSeconds)
+				metricRTPJitterLast.Set(jitterSeconds)
+				metricRTPPacketLossRatio.Set(float64(rr.FractionLost) / 255)
 			}
 		}
-
-		// For metrics
-		if sr, ok := pkt.(*rtcp.SenderReport); ok {
-			metricMediaReadRTPPackets.Add(int64(sr.PacketCount))
-			if len(sr.Reports) > 0 {
-				rr := sr.Reports[0]
-
-				// expect mono 8000 rate
-				jittDur := time.Duration(float64(rr.Jitter) / 8000 * float64(time.Second))
-				metricMediaJitter.Add(jittDur.Milliseconds())
-				if rtpStats.RTT < 0 {
-					// rtpStats.RTT = 0
-					log.Warn("Round trip time negative", "ssrc", rr.SSRC, "rtt", rtpStats.RTT.String())
-				}
-				rttMS := rtpStats.RTT.Milliseconds()
-
-				metricMediaRoundTripTimeGauge.Store(rttMS)
-				metricMediaRoundTripTime.Add(rttMS)
-				metricMediaPacketLoss.Store(uint64(rr.FractionLost))
-				metricMediaCount.Add(1)
-			}
+		if rtpStats.RTT > 0 {
+			rttSeconds := rtpStats.RTT.Seconds()
+			metricRTPRTT.Observe(rttSeconds)
+			metricRTPRTTLast.Set(rttSeconds)
 		}
 	}
 }
@@ -1230,7 +1224,7 @@ func onReadRTCP(stats *DialogMediaStats) func(pkt rtcp.Packet, rtpStats media.RT
 func onWriteRTCP(stats *DialogMediaStats) func(pkt rtcp.Packet, rtpStats media.RTPWriteStats) {
 	return func(pkt rtcp.Packet, rtpStats media.RTPWriteStats) {
 		if sr, ok := pkt.(*rtcp.SenderReport); ok {
-			metricMediaReadRTPPackets.Add(int64(sr.PacketCount))
+			metricRTPPacketsWritten.Add(float64(sr.PacketCount))
 			if len(sr.Reports) > 0 {
 				rr := sr.Reports[0]
 
@@ -1243,9 +1237,5 @@ func onWriteRTCP(stats *DialogMediaStats) func(pkt rtcp.Packet, rtpStats media.R
 		}
 		stats.PacketsWriteCount = rtpStats.PacketsCount
 
-		// For metrics
-		if sr, ok := pkt.(*rtcp.SenderReport); ok {
-			metricMediaWriteRTPPackets.Add(int64(sr.PacketCount))
-		}
 	}
 }
