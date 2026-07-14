@@ -1,0 +1,10 @@
+sequenceDiagram
+    Diagox->>+Agent: invite
+    Agent->>-Diagox: 200 OK
+    Agent->>+Diagox: answer 
+    Diagox->>-Agent: 200 OK
+    Agent->>+Diagox: read_dtmf
+    Diagox-->>Agent: 183 Read DTMF in Progress
+    Diagox->>-Agent: 200 OK (dtmf=1234)
+    Agent->>+Diagox: redirect endpoint=voicebot
+    Diagox->>-Agent: 200 OK

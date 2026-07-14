@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en"><head><script src="/diagox/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=diagox/livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="icon shortcut" href="/diagox/favicon.ico" sizes="32x32" />
 <link rel="icon" href="/diagox/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="/diagox/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
@@ -11,47 +11,45 @@
 <link rel="apple-touch-icon" href="/diagox/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/diagox/site.webmanifest" rel="manifest" />
 
-  <title>Call Flow API Protocol (Experimental) – Diagox</title>
-  <meta name="description" content=" NOTE: Feature is in Experimental stage and design may change!
-Call Flow API Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
-Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions. This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol." />
+  <title>Agent RPC Protocol – Diagox</title>
+  <meta name="description" content="Agent RPC Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
+Agent RPC is JSON protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions. This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.
+Unlike some other systems it is designed as well that you can achieve redundancy or load balancing. So you can connect many agents with same endpoint ID, where in this case traffic will be load balanced." />
 
   
-    <link rel="canonical" href="https://emiago.github.io/diagox/docs/flow_rpc/" itemprop="url" />
+    <link rel="canonical" href="http://localhost:1313/diagox/docs/agent_rpc/agent_rpc/" itemprop="url" />
   
 
   
 
-<meta property="og:title" content="Call Flow API Protocol (Experimental)" />
-<meta property="og:description" content="
-NOTE: Feature is in Experimental stage and design may change!
-
-Call Flow API Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
-Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions.
-This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol." />
+<meta property="og:title" content="Agent RPC Protocol" />
+<meta property="og:description" content="Agent RPC Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
+Agent RPC is JSON protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions.
+This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.
+Unlike some other systems it is designed as well that you can achieve redundancy or load balancing.
+So you can connect many agents with same endpoint ID, where in this case traffic will be load balanced." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://emiago.github.io/diagox/docs/flow_rpc/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:1313/diagox/docs/agent_rpc/agent_rpc/" /><meta property="article:section" content="docs" />
 
 
 
   
-  <meta itemprop="name" content="Call Flow API Protocol (Experimental)">
-  <meta itemprop="description" content="NOTE: Feature is in Experimental stage and design may change!
-Call Flow API Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
-Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions. This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.">
-  <meta itemprop="wordCount" content="688">
+  <meta itemprop="name" content="Agent RPC Protocol">
+  <meta itemprop="description" content="Agent RPC Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
+Agent RPC is JSON protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions. This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.
+Unlike some other systems it is designed as well that you can achieve redundancy or load balancing. So you can connect many agents with same endpoint ID, where in this case traffic will be load balanced.">
+  <meta itemprop="wordCount" content="592">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Call Flow API Protocol (Experimental)">
-  <meta name="twitter:description" content="NOTE: Feature is in Experimental stage and design may change!
-Call Flow API Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
-Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions. This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.">
+  <meta name="twitter:title" content="Agent RPC Protocol">
+  <meta name="twitter:description" content="Agent RPC Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs
+Agent RPC is JSON protocol over Websocket and it is very close to SIP as it is all based on Request/Response transactions. This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.
+Unlike some other systems it is designed as well that you can achieve redundancy or load balancing. So you can connect many agents with same endpoint ID, where in this case traffic will be load balanced.">
 
-    <link rel="preload" href="/diagox/css/compiled/main.min.23a12191daf50c320fcb5ce50e8c895a47f37ce361f66be7c771e19f254b32b2.css" as="style" integrity="sha256-I6Ehkdr1DDIPy1zlDoyJWkfzfONh9mvnx3HhnyVLMrI=" />
-    <link href="/diagox/css/compiled/main.min.23a12191daf50c320fcb5ce50e8c895a47f37ce361f66be7c771e19f254b32b2.css" rel="stylesheet" integrity="sha256-I6Ehkdr1DDIPy1zlDoyJWkfzfONh9mvnx3HhnyVLMrI=" />
-
+    <link href="/diagox/css/compiled/main.css" rel="stylesheet" />
 
 
-  <link href="/diagox/css/custom.min.bac2892c586c1e5d7346f7936a01e48dccd909092296d6852f250b202dcd054c.css" rel="stylesheet" integrity="sha256-usKJLFhsHl1zRveTagHkjczZCQkiltaFLyULIC3NBUw=" />
+
+  <link href="/diagox/css/custom.css" rel="stylesheet" />
 
 
 
@@ -176,7 +174,26 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
     href="/diagox/blog/"
     
   >Blog
-    </a></li>
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/diagox/blog/sip_unit_testing/"
+    
+  >Sip Unit Testing
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/diagox/blog/srtp/"
+    
+  >Srtp
+    </a>
+              
+            </li></ul>
+      </div></li>
           <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
@@ -212,9 +229,9 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
             </li><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
-    href="/diagox/docs/flow_rpc/"
+    href="/diagox/docs/agent_rpc/agent_rpc/"
     
-  >Call Flow API Protocol (Experimental)
+  >Agent RPC Protocol
     </a>
   
     <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
@@ -239,16 +256,24 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
               <a
                 href="#diagox-requests"
                 class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
-              >Diagox Requests</a>
+              >Diagox requests</a>
             </li>
           <li>
               <a
                 href="#agent-requests"
                 class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
-              >Agent Requests</a>
+              >Agent requests</a>
             </li>
           </ul>
   
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/diagox/docs/api/"
+    
+  >API
+    </a>
               
             </li></ul>
       </div></li>
@@ -280,9 +305,16 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
           <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
-    href="/diagox/docs/flow_rpc/"
+    href="/diagox/docs/agent_rpc/agent_rpc/"
     
-  >Call Flow API Protocol (Experimental)
+  >Agent RPC Protocol
+    </a></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/diagox/docs/api/"
+    
+  >API
     </a></li>
         
       </ul>
@@ -311,10 +343,6 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#sdks-supported">SDKs supported:
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
         <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#connecting">Connecting
         </a>
       </li>
@@ -327,7 +355,7 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#diagox-requests">Diagox Requests
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#diagox-requests">Diagox requests
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
@@ -339,7 +367,7 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#agent-requests">Agent Requests
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#agent-requests">Agent requests
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
@@ -356,10 +384,6 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
         <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#read_dtmf">read_dtmf
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#listen">listen
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
@@ -388,18 +412,16 @@ Call Flow API is JSON RPC protocol over Websocket and it is very close to SIP as
   <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
         <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
           <a href="/diagox/docs/">Docs</a>
-        </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Call Flow API Protocol (Experimental)</div>
+        </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Agent RPC Protocol</div>
   </div>
 
         <div class="content">
-          <h1>Call Flow API Protocol (Experimental)</h1>
-          <blockquote>
-<p><strong>NOTE</strong>: Feature is in Experimental stage and design may change!</p>
-</blockquote>
-<p>Call Flow API Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs</p>
-<p>Call Flow API is <strong>JSON RPC protocol over Websocket</strong> and it is very close to SIP as it is all based on Request/Response transactions.
+          <h1>Agent RPC Protocol</h1>
+          <p>Agent RPC Protocol tries to give users way to control routing of call in more programable manner with some limited set of APIs</p>
+<p>Agent RPC is <strong>JSON protocol over Websocket</strong> and it is very close to SIP as it is all based on Request/Response transactions.
 This makes a bit more easier to handle sessions and reason about, instead inventing some totally different protocol.</p>
-<p>Unlike some other systems it is designed as well that you can achieve <strong>redundancy</strong> or even <strong>load balancing</strong>.</p>
+<p>Unlike some other systems it is designed as well that you can achieve redundancy or load balancing.
+So you can connect many agents with same endpoint ID, where in this case traffic will be load balanced.</p>
 <h3>Use cases<span class="hx-absolute -hx-mt-20" id="use-cases"></span>
     <a href="#use-cases" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>API allows very simple actions and mainly intention is that you are able to influence on the routing of call.
 Here are some use cases that we find useful:</p>
@@ -411,32 +433,28 @@ Here are some use cases that we find useful:</p>
 <li>Autoscaling underhood systems</li>
 </ul>
 <h2>Protocol<span class="hx-absolute -hx-mt-20" id="protocol"></span>
-    <a href="#protocol" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p><strong>NOTE on Terms:</strong></p>
+    <a href="#protocol" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Protocol is request/response transactions as P2P communication.
+Response can be</p>
 <ul>
-<li><strong>Agent</strong> - is endpoint or user agent that comunicates over call flow API</li>
-<li><strong>Transaction</strong> - is single exchange of req/response and it is terminated with final response or responses with &gt;2xx status code</li>
-<li><strong>P2P</strong> - peer to peer</li>
+<li>100 - 200 as Provisional. This are mostly informational for request that need to take time to complete like playing a file</li>
+<li>200 - 600 as Final</li>
 </ul>
-<p>Protocol is request/response transactions as P2P communication.</p>
 <p>All transactions/sessions are multiplexed over single WS connection, but to make this easier, SDKs will be provided</p>
-<h3>SDKs supported:<span class="hx-absolute -hx-mt-20" id="sdks-supported"></span>
-    <a href="#sdks-supported" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
-<li><a href="https://github.com/emiago/diagox-flow-sdk-js" target="_blank" rel="noopener">NodeJS - diagox-flow-sdk-js</a></li>
+<p>SDKs supported so far:</p>
+<ul>
+<li><a href="https://github.com/emiago/diagox-agent-sdk-js" target="_blank" rel="noopener">NodeJS</a></li>
 <li><strong>Go</strong> - TODO</li>
 </ul>
 <h3>Connecting<span class="hx-absolute -hx-mt-20" id="connecting"></span>
     <a href="#connecting" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Agent must connect (we may implement other way arround) to websocket
 server on port (default) <code>6000</code>, and use <code>endpoint</code> parameter for endpoint unique name.</p>
 <p>Example with wscat tool:
-<code>wscat --connect ws://localhost:6000\?endpoint=flowagent</code></p>
-<blockquote>
-<p><strong>NOTE</strong>: DO NOT EXPOSE THIS PORT as there is no yet auth system.</p>
-</blockquote>
-<p>You can <strong>connect many agents</strong> with same endpoint ID, where in this case traffic will be randomly load balanced.</p>
+<code>wscat --connect ws://localhost:6000\?endpoint=myagent</code></p>
+<p>DO NOT EXPOSE THIS PORT as there is no yet auth system.</p>
 <h3>Example<span class="hx-absolute -hx-mt-20" id="example"></span>
     <a href="#example" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Here simple use case of answering a call and running playback and redirecting</p>
-<img src="flow-rpc-playback.png" width="600" height="600" alt="flowrpc">
-<p>Diagox has endpoint <code>flowagent</code> and <code>voicebot</code> configuration for routing:</p>
+<img src="images/agent-rpc-playback.png" width="600" height="600" alt="agentrpc">
+<p>Diagox has endpoint <code>myagent</code> and <code>voicebot</code> configuration for routing:</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
   
 
@@ -449,9 +467,9 @@ server on port (default) <code>6000</code>, and use <code>endpoint</code> parame
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">voicebot</span><span class="p">:</span><span class="w"> </span><span class="c"># Address of record</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;sip:voicebot:5080&#34;</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">flowagent</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">myagent</span><span class="p">:</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;flow&#34;</span><span class="w"> </span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;agent&#34;</span><span class="w"> </span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -464,25 +482,12 @@ server on port (default) <code>6000</code>, and use <code>endpoint</code> parame
   
 </div>
 <h2>Requests/Responses<span class="hx-absolute -hx-mt-20" id="requestsresponses"></span>
-    <a href="#requestsresponses" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Request fields:</p>
+    <a href="#requestsresponses" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Request are in this format</p>
 <ul>
 <li><code>id</code> - unique id of request</li>
 <li><code>did</code> - dialog id</li>
 <li><code>op</code> - operation or name of request</li>
-<li><code>data</code> - payload <strong>object</strong></li>
-</ul>
-<p>Response fields:</p>
-<ul>
-<li><code>id</code> - unique id of request</li>
-<li><code>did</code> - dialog id</li>
-<li><code>code</code> - 100-600 status codes</li>
-<li><code>reason</code> - Status code reason</li>
-<li><code>data</code> - payload <strong>object</strong></li>
-</ul>
-<p>Response can be</p>
-<ul>
-<li>100 - 200 as Provisional. This are mostly informational for request that need to take time to complete like playing a file</li>
-<li>200 - 600 as Final</li>
+<li><code>data</code> - payload <strong>object</strong>  for request</li>
 </ul>
 <p>Example</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
@@ -515,7 +520,7 @@ server on port (default) <code>6000</code>, and use <code>endpoint</code> parame
 
   
 </div>
-<h2>Diagox Requests<span class="hx-absolute -hx-mt-20" id="diagox-requests"></span>
+<h2>Diagox requests<span class="hx-absolute -hx-mt-20" id="diagox-requests"></span>
     <a href="#diagox-requests" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>For incoming call Diagox will send <code>invite</code> request for agent to accept or not.
 In case of not accepting depending on response diagox can send this
 invite to other agent if loadbalancing is in place.</p>
@@ -531,7 +536,7 @@ Payload:</p>
 </ul>
 <h3>bye<span class="hx-absolute -hx-mt-20" id="bye"></span>
     <a href="#bye" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Indication that call is exiting either due to remote hangup, agent hangup or redirect.</p>
-<h2>Agent Requests<span class="hx-absolute -hx-mt-20" id="agent-requests"></span>
+<h2>Agent requests<span class="hx-absolute -hx-mt-20" id="agent-requests"></span>
     <a href="#agent-requests" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>ring<span class="hx-absolute -hx-mt-20" id="ring"></span>
     <a href="#ring" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Starts ring with SIP 180.</p>
 <h3>answer<span class="hx-absolute -hx-mt-20" id="answer"></span>
@@ -554,12 +559,6 @@ Payload:</p>
 <li><code>duration_sec</code> - how long to wait for dtmf(s) in seconds</li>
 <li><code>termination</code> - stop on this termination digit</li>
 </ul>
-<h3>listen<span class="hx-absolute -hx-mt-20" id="listen"></span>
-    <a href="#listen" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Records shorts audio in wav. Sent over binary frames.
-Payload:</p>
-<ul>
-<li><code>duration_sec</code> - how long to wait (Max 30sec)</li>
-</ul>
 <h3>hangup<span class="hx-absolute -hx-mt-20" id="hangup"></span>
     <a href="#hangup" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Hangups a call.</p>
 <h3>redirect<span class="hx-absolute -hx-mt-20" id="redirect"></span>
@@ -572,7 +571,11 @@ Payload</p>
         href="/diagox/docs/webrtc/"
         title="WebRTC"
         class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
-      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>WebRTC</a></div>
+      ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>WebRTC</a><a
+        href="/diagox/docs/api/"
+        title="API"
+        class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
+      >API<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
         
       </main>
     </article>
@@ -588,11 +591,11 @@ Payload</p>
   </div>
 </footer>
     
-    <script defer src="/diagox/js/main.min.d0f0346255ba9418db8fcf7f9440ca4e532e06276d8df17497e19e1045ee360b.js" integrity="sha256-0PA0YlW6lBjbj89/lEDKTlMuBidtjfF0l&#43;GeEEXuNgs="></script>
+    <script defer src="/diagox/js/main.js" integrity=""></script>
 
 
 <script defer src="/diagox/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
-    <script defer src="/diagox/en.search.min.82d7eaf95277f6ab75c336e7404634fa7dac99be94c35198279ac8ce79b7c12e.js" integrity="sha256-gtfq&#43;VJ39qt1wzbnQEY0&#43;n2smb6Uw1GYJ5rIznm3wS4="></script>
+    <script defer src="/diagox/en.search.js" integrity=""></script>
 
 
   </body>
