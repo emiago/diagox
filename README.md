@@ -49,6 +49,28 @@ docker run --rm \
   diagox
 ```
 
+### Diago load test
+
+The repository includes a Diago-based load generator. It runs an in-process
+UAS on port `5080`, originates concurrent calls to the configured Diagox SIP
+target, and sends/receives PCMU RTP for every answered call. Configure Diagox
+to route its outbound leg to `sip:127.0.0.1:5080`, then run:
+
+```bash
+go run ./cmd/diagox-loadtest \
+  -target sip:1000@127.0.0.1:5060 \
+  -uas-listen 127.0.0.1:5080 \
+  -calls 100 \
+  -rate 10 \
+  -concurrency 50 \
+  -duration 60s
+```
+
+Use `-calls 0` to run until interrupted, `-media=false` for SIP-only load,
+and `-metrics-addr :9091` to expose load-generator metrics at
+`http://localhost:9091/metrics`. Diagox exposes its application metrics at
+`http://localhost:6060/metrics`.
+
 See the [installation guide](https://emiago.github.io/diagox/docs/install/)
 for runtime configuration, networking, and deployment details.
 
@@ -87,18 +109,22 @@ it possible to adapt the same gateway to different networks and providers.
 - [WebRTC setup](https://emiago.github.io/diagox/docs/webrtc/)
 - [Feature overview](https://emiago.github.io/diagox/docs/#features)
 
-## Open source and enterprise
+## Open source and scalable (enterprise)
 
 The open-source Diagox distribution provides a focused, single-instance voice
 gateway that can be run as a binary or container.
 
-Enterprise capabilities are available separately for deployments that need:
+Scalable (enterprise) capabilities are available separately for deployments
+that need:
 
 - Multiple coordinated Diagox instances
 - Kubernetes deployment charts
 - External registry caching
 - Database-backed call detail records
 - Centralized management of instances and ingress configuration
+
+For more information about scalable (enterprise) deployments, contact
+[emirfreelance91@gmail.com](mailto:emirfreelance91@gmail.com).
 
 ## Development
 
