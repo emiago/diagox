@@ -30,9 +30,9 @@ endpoints. It runs as a single Go binary and is built on top of
 The fastest way to explore Diagox is to start with the minimal configuration:
 
 ```bash
-go build -o diagox ./cmd/diagox
+go install ./cmd/diagox
 
-CONF_FILE=example-configs/diagox-minimal.yaml ./diagox
+CONF_FILE=example-configs/diagox-minimal.yaml diagox
 ```
 
 The configuration expects an endpoint named `bob` at
@@ -105,7 +105,7 @@ Enterprise capabilities are available separately for deployments that need:
 Build the server with:
 
 ```bash
-go build ./cmd/diagox
+go install ./cmd/diagox
 ```
 
 Run the Go test suite with:
