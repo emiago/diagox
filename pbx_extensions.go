@@ -10,7 +10,7 @@ import (
 	"net"
 	"time"
 
-	"gitlab.com/emiagox/diagox/testdata"
+	"github.com/emiago/diagox/testdata"
 
 	"github.com/emiago/diago"
 	"github.com/emiago/diago/media"

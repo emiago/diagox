@@ -1,13 +1,11 @@
-module gitlab.com/emiagox/diagox
+module github.com/emiago/diagox
 
 go 1.24.0
-
-replace github.com/emiago/diago => /home/emia/Projects/mystuf/diago
 
 require (
 	github.com/Jille/raft-grpc-transport v1.6.1
 	github.com/caarlos0/env/v9 v9.0.0
-	github.com/emiago/diago v0.28.0
+	github.com/emiago/diago v0.30.1-0.20260717073018-8ba0fb2e8096
 	github.com/emiago/sipgo v1.4.3
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/gobwas/ws v1.4.0
@@ -16,10 +14,8 @@ require (
 	github.com/icholy/digest v1.1.0
 	github.com/lib/pq v1.10.9
 	github.com/nats-io/nats.go v1.45.0
-	github.com/pion/interceptor v0.1.44
 	github.com/pion/rtcp v1.2.16
 	github.com/pion/rtp v1.10.1
-	github.com/pion/sdp/v3 v3.0.18
 	github.com/pion/turn/v2 v2.1.6
 	github.com/pion/webrtc/v3 v3.3.6
 	github.com/prometheus/client_golang v1.20.5
@@ -28,7 +24,6 @@ require (
 	github.com/samber/slog-zerolog v1.0.0
 	github.com/stretchr/testify v1.11.1
 	github.com/testcontainers/testcontainers-go v0.35.0
-	github.com/testcontainers/testcontainers-go/modules/postgres v0.35.0
 	google.golang.org/grpc v1.64.1
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -61,7 +56,6 @@ require (
 	github.com/gobwas/httphead v0.1.0 // indirect
 	github.com/gobwas/pool v0.2.1 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-hclog v1.6.2 // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
@@ -87,10 +81,12 @@ require (
 	github.com/pion/datachannel v1.6.0 // indirect
 	github.com/pion/dtls/v2 v2.2.12 // indirect
 	github.com/pion/ice/v2 v2.3.38 // indirect
+	github.com/pion/interceptor v0.1.44 // indirect
 	github.com/pion/logging v0.2.4 // indirect
 	github.com/pion/mdns v0.0.12 // indirect
 	github.com/pion/randutil v0.1.0 // indirect
 	github.com/pion/sctp v1.9.5 // indirect
+	github.com/pion/sdp/v3 v3.0.18 // indirect
 	github.com/pion/srtp/v2 v2.0.20 // indirect
 	github.com/pion/srtp/v3 v3.0.10 // indirect
 	github.com/pion/stun v0.6.1 // indirect

@@ -14,8 +14,8 @@ import (
 
 	"github.com/emiago/diago/media"
 	"github.com/emiago/sipgo/sip"
-	"gitlab.com/emiagox/diagox"
-	"gitlab.com/emiagox/diagox/cmd"
+	"github.com/emiago/diagox"
+	"github.com/emiago/diagox/cmd"
 )
 
 var (
