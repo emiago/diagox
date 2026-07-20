@@ -5,24 +5,31 @@
 </p>
 
 <p align="center">
-  <strong>A self-hosted SIP and WebRTC voice gateway</strong><br>
+  <strong>SIP and media ingress for modern voice systems</strong><br>
   Route, bridge, and connect real-time communications across SIP, RTP, and WebRTC.
 </p>
 
-Diagox is a programmable voice gateway for connecting PBXs, SIP providers,
-WebRTC clients, internal voice services, and other reachable telephony
-endpoints. It runs as a single Go binary and is built on top of
+Diagox is a programmable ingress service for SIP and media. Acting as a B2BUA
+and media proxy, it connects PBXs, SIP providers, WebRTC clients, internal
+voice services, and other reachable telephony endpoints. It runs as a single
+Go binary and is built on top of
 [sipgo](https://github.com/emiago/sipgo) and
 [diago](https://github.com/emiago/diago).
+
+Diagox is designed to be cloud-friendly: the same small service can run locally,
+in a container, or as part of a larger distributed voice platform. Its
+configuration-driven routing and endpoint model also makes it well suited to
+automation and fast operational changes.
 
 ## What Diagox provides
 
 - SIP ingress and egress over UDP, TCP, and WebSocket transports
-- SIP dialog routing and bridging between endpoints
-- WebRTC media and browser-friendly SIP/WebSocket connectivity
+- RTP and WebRTC media ingress, egress, and proxying
+- B2BUA-style SIP dialog routing and bridging between endpoints
+- Browser-friendly SIP/WebSocket connectivity
 - Registrar and in-memory contact registry support
 - Programmable routes with prefixes, fallback destinations, and hangup rules
-- RTP media proxying, call recording, and VoIP monitoring
+- Call recording, media statistics, and VoIP monitoring
 - YAML-based configuration suitable for local deployments and containers
 
 ## Get started
@@ -101,6 +108,10 @@ Diagox configuration is organized around three pieces:
 
 This keeps the call-routing policy separate from the service process and makes
 it possible to adapt the same gateway to different networks and providers.
+For managed or distributed deployments, remote provisioning can apply endpoint
+and routing changes quickly without treating every change as a manual server
+operation. The same configuration interface is also suitable for automated,
+including AI-assisted, operational workflows.
 
 ## Documentation
 
@@ -121,7 +132,8 @@ that need:
 - Kubernetes deployment charts
 - External registry caching
 - Database-backed call detail records
-- Centralized management of instances and ingress configuration
+- Centralized management and remote provisioning of instances and SIP/media
+  ingress configuration
 
 For more information about scalable deployments, contact
 [mail](mailto:emirfreelance91@gmail.com).
