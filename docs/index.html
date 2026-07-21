@@ -12,10 +12,10 @@
 <link fetchpriority="low" href="/diagox/site.webmanifest" rel="manifest" />
 
   <title>Diagox</title>
-  <meta name="description" content="Welcome to diagox documentation!.
-What is Diagox? Diagox is modern approach for your cloud VOIP SIP/RTP/WEBRTC Ingress service, built on top of sipgo and diago library.
-It is main purpose todo easy routing and bridging to allow you to scale internal API/VOIP services.
-Features Call bridging as B2B that performs SIP topology hiding Integrated Registrar to allow user (SIP phones) registering and discovery Media proxy that avoids transcoding and therefore saves your CPU and costs Call Rate Limiting / Inbound &#43; Outbound Simple routing and matching for easier handling hundreds of different routes Built IN Fallback routing based on SIP Response when Carrier/Endpoint start to reject Endpoint IP/Auth identification SIP/WEBRTC bridging for Browser clients Call History with SIP Trace, RTCP metrics and Quality calculations based on networking Call Recording to WAV format / as interleaved mixed stereo streams which is great for Transcription Configuration validation on bootstrap Structured logging as JSON for easier integration with Cloud tools NEXT: -&gt; Install" />
+  <meta name="description" content="Welcome to the Diagox documentation.
+What is Diagox? Diagox is a cloud-friendly SIP and media ingress service built on sipgo and diago.
+It operates as a purpose-built signaling and media Back-to-Back User Agent (B2BUA): it terminates an incoming SIP dialog leg and originates a separate outgoing leg. Its integrated media proxy relays and bridges RTP and WebRTC media between endpoints.
+Together, these components provide selected Session Border Controller (SBC) capabilities—including SIP topology hiding, endpoint authentication, rate limiting, programmable routing, media relay, and call observability—without positioning Diagox as a full carrier-grade SBC." />
 
   
     <link rel="canonical" href="https://emiago.github.io/diagox/docs/" itemprop="url" />
@@ -30,17 +30,17 @@ Features Call bridging as B2B that performs SIP topology hiding Integrated Regis
 
   
   <meta itemprop="name" content="Diagox">
-  <meta itemprop="description" content="Welcome to diagox documentation!.
-What is Diagox? Diagox is modern approach for your cloud VOIP SIP/RTP/WEBRTC Ingress service, built on top of sipgo and diago library.
-It is main purpose todo easy routing and bridging to allow you to scale internal API/VOIP services.
-Features Call bridging as B2B that performs SIP topology hiding Integrated Registrar to allow user (SIP phones) registering and discovery Media proxy that avoids transcoding and therefore saves your CPU and costs Call Rate Limiting / Inbound &#43; Outbound Simple routing and matching for easier handling hundreds of different routes Built IN Fallback routing based on SIP Response when Carrier/Endpoint start to reject Endpoint IP/Auth identification SIP/WEBRTC bridging for Browser clients Call History with SIP Trace, RTCP metrics and Quality calculations based on networking Call Recording to WAV format / as interleaved mixed stereo streams which is great for Transcription Configuration validation on bootstrap Structured logging as JSON for easier integration with Cloud tools NEXT: -&gt; Install">
-  <meta itemprop="wordCount" content="160">
+  <meta itemprop="description" content="Welcome to the Diagox documentation.
+What is Diagox? Diagox is a cloud-friendly SIP and media ingress service built on sipgo and diago.
+It operates as a purpose-built signaling and media Back-to-Back User Agent (B2BUA): it terminates an incoming SIP dialog leg and originates a separate outgoing leg. Its integrated media proxy relays and bridges RTP and WebRTC media between endpoints.
+Together, these components provide selected Session Border Controller (SBC) capabilities—including SIP topology hiding, endpoint authentication, rate limiting, programmable routing, media relay, and call observability—without positioning Diagox as a full carrier-grade SBC.">
+  <meta itemprop="wordCount" content="190">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Diagox">
-  <meta name="twitter:description" content="Welcome to diagox documentation!.
-What is Diagox? Diagox is modern approach for your cloud VOIP SIP/RTP/WEBRTC Ingress service, built on top of sipgo and diago library.
-It is main purpose todo easy routing and bridging to allow you to scale internal API/VOIP services.
-Features Call bridging as B2B that performs SIP topology hiding Integrated Registrar to allow user (SIP phones) registering and discovery Media proxy that avoids transcoding and therefore saves your CPU and costs Call Rate Limiting / Inbound &#43; Outbound Simple routing and matching for easier handling hundreds of different routes Built IN Fallback routing based on SIP Response when Carrier/Endpoint start to reject Endpoint IP/Auth identification SIP/WEBRTC bridging for Browser clients Call History with SIP Trace, RTCP metrics and Quality calculations based on networking Call Recording to WAV format / as interleaved mixed stereo streams which is great for Transcription Configuration validation on bootstrap Structured logging as JSON for easier integration with Cloud tools NEXT: -&gt; Install">
+  <meta name="twitter:description" content="Welcome to the Diagox documentation.
+What is Diagox? Diagox is a cloud-friendly SIP and media ingress service built on sipgo and diago.
+It operates as a purpose-built signaling and media Back-to-Back User Agent (B2BUA): it terminates an incoming SIP dialog leg and originates a separate outgoing leg. Its integrated media proxy relays and bridges RTP and WebRTC media between endpoints.
+Together, these components provide selected Session Border Controller (SBC) capabilities—including SIP topology hiding, endpoint authentication, rate limiting, programmable routing, media relay, and call observability—without positioning Diagox as a full carrier-grade SBC.">
 
     <link rel="preload" href="/diagox/css/compiled/main.min.23a12191daf50c320fcb5ce50e8c895a47f37ce361f66be7c771e19f254b32b2.css" as="style" integrity="sha256-I6Ehkdr1DDIPy1zlDoyJWkfzfONh9mvnx3HhnyVLMrI=" />
     <link href="/diagox/css/compiled/main.min.23a12191daf50c320fcb5ce50e8c895a47f37ce361f66be7c771e19f254b32b2.css" rel="stylesheet" integrity="sha256-I6Ehkdr1DDIPy1zlDoyJWkfzfONh9mvnx3HhnyVLMrI=" />
@@ -308,24 +308,33 @@ Features Call bridging as B2B that performs SIP topology hiding Integrated Regis
 
         <div class="content">
           
-          <p>Welcome to diagox documentation!.</p>
+          <p>Welcome to the Diagox documentation.</p>
 <h2>What is Diagox?<span class="hx-absolute -hx-mt-20" id="what-is-diagox"></span>
-    <a href="#what-is-diagox" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p><strong>Diagox</strong> is modern approach for your cloud VOIP <strong>SIP/RTP/WEBRTC</strong> <strong>Ingress</strong> service, built on top of <a href="https://github.com/emiago/sipgo" target="_blank" rel="noopener">sipgo</a> and <a href="https://github.com/emiago/diago" target="_blank" rel="noopener">diago</a> library.</p>
-<p>It is main purpose todo easy routing and bridging to allow you to scale internal API/VOIP services.</p>
+    <a href="#what-is-diagox" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p><strong>Diagox</strong> is a cloud-friendly SIP and media ingress service built on
+<a href="https://github.com/emiago/sipgo" target="_blank" rel="noopener">sipgo</a> and
+<a href="https://github.com/emiago/diago" target="_blank" rel="noopener">diago</a>.</p>
+<p>It operates as a purpose-built signaling and media Back-to-Back User Agent
+(B2BUA): it terminates an incoming SIP dialog leg and originates a separate
+outgoing leg. Its integrated media proxy relays and bridges RTP and WebRTC media
+between endpoints.</p>
+<p>Together, these components provide selected Session Border Controller (SBC)
+capabilities—including SIP topology hiding, endpoint authentication, rate
+limiting, programmable routing, media relay, and call observability—without
+positioning Diagox as a full carrier-grade SBC.</p>
 <h2>Features<span class="hx-absolute -hx-mt-20" id="features"></span>
     <a href="#features" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
-<li>Call bridging as B2B that performs SIP topology hiding</li>
-<li>Integrated Registrar to allow user (SIP phones) registering and discovery</li>
-<li>Media proxy that avoids transcoding and therefore saves your CPU and costs</li>
-<li>Call Rate Limiting / Inbound + Outbound</li>
-<li>Simple routing and matching for easier handling hundreds of different routes</li>
-<li>Built IN Fallback routing based on SIP Response when Carrier/Endpoint start to reject</li>
-<li>Endpoint IP/Auth identification</li>
-<li>SIP/WEBRTC bridging for Browser clients</li>
-<li>Call History with SIP Trace, RTCP metrics and Quality calculations based on networking</li>
-<li>Call Recording to WAV format / as interleaved mixed stereo streams which is great for Transcription</li>
-<li>Configuration validation on bootstrap</li>
-<li>Structured logging as JSON for easier integration with Cloud tools</li>
+<li>B2BUA call routing and dialog bridging with SIP topology hiding</li>
+<li>Integrated registrar for SIP endpoint registration and discovery</li>
+<li>Media proxy that relays RTP without transcoding</li>
+<li>Inbound and outbound call rate limiting</li>
+<li>Programmable routing and matching for large route sets</li>
+<li>Response-based fallback routing when a carrier or endpoint rejects a call</li>
+<li>Endpoint identification by IP address or authentication</li>
+<li>SIP/WebRTC bridging for browser clients</li>
+<li>Call history with SIP traces, RTCP metrics, and network quality calculations</li>
+<li>WAV call recording as interleaved stereo streams suitable for transcription</li>
+<li>Configuration validation during bootstrap</li>
+<li>Structured JSON logging for integration with cloud tooling</li>
 </ul>
 <p><strong>NEXT</strong>: <a href="install" >-&gt; Install</a></p>
 
