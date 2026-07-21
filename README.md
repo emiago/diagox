@@ -9,23 +9,27 @@
   Route, bridge, and connect real-time communications across SIP, RTP, and WebRTC.
 </p>
 
-Diagox is a programmable ingress service for SIP and media. Acting as a B2BUA
-and media proxy, it connects PBXs, SIP providers, WebRTC clients, internal
-voice services, and other reachable telephony endpoints. It runs as a single
-Go binary and is built on top of
+> [!IMPORTANT]
+> ☁️ **Cloud-friendly by design.** Diagox fits local, containerized, and
+> distributed deployments. Managed deployments can remotely provision endpoints
+> and routing for fast operational changes, enabling automation and AI-assisted
+> configuration workflows.
+
+Diagox is programmable SIP and media ingress for modern voice systems, built
+around a purpose-built signaling and media B2BUA with an integrated media
+proxy. It connects PBXs, SIP providers, WebRTC clients, internal voice services,
+and other reachable telephony endpoints. Diagox provides selected Session
+Border Controller (SBC) capabilities—including topology hiding, authentication,
+rate limiting, and call observability—without positioning itself as a full
+carrier-grade SBC. It runs as a single Go binary and is built on top of
 [sipgo](https://github.com/emiago/sipgo) and
 [diago](https://github.com/emiago/diago).
-
-Diagox is designed to be cloud-friendly: the same small service can run locally,
-in a container, or as part of a larger distributed voice platform. Its
-configuration-driven routing and endpoint model also makes it well suited to
-automation and fast operational changes.
 
 ## What Diagox provides
 
 - SIP ingress and egress over UDP, TCP, and WebSocket transports
 - RTP and WebRTC media ingress, egress, and proxying
-- B2BUA-style SIP dialog routing and bridging between endpoints
+- B2BUA call routing and dialog bridging between endpoints
 - Browser-friendly SIP/WebSocket connectivity
 - Registrar and in-memory contact registry support
 - Programmable routes with prefixes, fallback destinations, and hangup rules
@@ -108,10 +112,6 @@ Diagox configuration is organized around three pieces:
 
 This keeps the call-routing policy separate from the service process and makes
 it possible to adapt the same gateway to different networks and providers.
-For managed or distributed deployments, remote provisioning can apply endpoint
-and routing changes quickly without treating every change as a manual server
-operation. The same configuration interface is also suitable for automated,
-including AI-assisted, operational workflows.
 
 ## Documentation
 
